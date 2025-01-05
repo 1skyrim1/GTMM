@@ -79,7 +79,7 @@ public class GTMMMachine extends WorkableElectricMultiblockMachine implements IG
                 var copied = recipe.copy(ContentModifier.multiplier(Parallellimit));
 
                 // If machine has enough ingredients, return copied recipe
-                if (copied.matchRecipe(this)) {
+                if (copied.matchRecipe(gtmmmachine) == GTRecipe.ActionResult.SUCCESS) {
                     copied.duration = copied.duration / Parallellimit;
                     return copied;
                 }
