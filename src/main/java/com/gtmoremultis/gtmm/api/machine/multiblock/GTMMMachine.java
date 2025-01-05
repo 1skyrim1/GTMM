@@ -89,4 +89,10 @@ public class GTMMMachine extends WorkableElectricMultiblockMachine implements IG
         }
         return null;
     }
+
+    // NBT Save ?
+    @Override
+    public ManagedFieldHolder getFieldHolder() {
+        return MANAGED_FIELD_HOLDER;
+    }
 }
