@@ -16,4 +16,7 @@ public class GTMMItems {
     private static NonNullConsumer<? super ComponentItem> attach(TooltipBehavior components) {
         return (item) -> item.attachComponents(components);
     }
+
+    public static void init() {
+    }
 }

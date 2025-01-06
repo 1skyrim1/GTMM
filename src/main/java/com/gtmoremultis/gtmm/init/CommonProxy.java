@@ -7,6 +7,7 @@ import com.gtmoremultis.gtmm.data.GTMMItems;
 
 public class CommonProxy {
     public static void init() {
+        GTMMItems.init();
         GTMMBlocks.init();
         GTMMDataGen.init();
         GTMMRegistries.REGISTRATE.registerRegistrate();
