@@ -13,7 +13,7 @@ public class GTMMRecipeTypes {
             .setMaxIOSize(12, 1, 8, 0)
             .setEUIO(IO.IN)
             .prepareBuilder(gtRecipeBuilder -> gtRecipeBuilder.EUt(GTValues.VA[GTValues.LV]))
-            .setSlotOverlay(false, false, GuiTextures.BOX_OVERLAY)
+            .setSlotOverlay(false, false, GuiTextures.CIRCUIT_OVERLAY)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ASSEMBLY_LINE, ProgressTexture.FillDirection.LEFT_TO_RIGHT)
             .setMaxTooltips(4)
             .setSound(GTSoundEntries.ASSEMBLER);

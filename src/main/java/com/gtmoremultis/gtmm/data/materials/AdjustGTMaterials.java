@@ -7,6 +7,7 @@ import static com.gtmoremultis.gtmm.data.GTMMMaterials.*;
 
 public class AdjustGTMaterials {
     public static void init() {
-        Iridium.addFlags(MaterialFlags.GENERATE_FRAME);
+        Iridium.addFlags(MaterialFlags.GENERATE_DENSE);
+        IronMagnetic.addFlags(MaterialFlags.GENERATE_LONG_ROD);
     }
 }

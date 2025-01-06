@@ -48,7 +48,7 @@ public class SelfRecipes {
     }
 
     private static void machineRecipes(Consumer<FinishedRecipe> provider) {
-        ASSEMBLY_LINE_RECIPES.recipeBuilder("coal")
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("component_assembly_line")
                 .inputItems(GTMultiMachines.ASSEMBLY_LINE.asStack(16))
                 .inputItems(GTBlocks.CASING_ASSEMBLY_CONTROL.asStack(16))
                 .inputItems(GTBlocks.CASING_ASSEMBLY_LINE.asStack(32))
