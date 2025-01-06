@@ -9,7 +9,7 @@ import com.gregtechceu.gtceu.common.data.GTSoundEntries;
 import com.lowdragmc.lowdraglib.gui.texture.ProgressTexture;
 
 public class GTMMRecipeTypes {
-    public static final GTRecipeType CoAL_RECIPES = GTRecipeTypes.register("coal", GTRecipeTypes.MULTIBLOCK)
+    public static final GTRecipeType CoAL_RECIPES = GTRecipeTypes.register("component_assembly_line", GTRecipeTypes.MULTIBLOCK)
             .setMaxIOSize(12, 1, 8, 0)
             .setEUIO(IO.IN)
             .prepareBuilder(gtRecipeBuilder -> gtRecipeBuilder.EUt(GTValues.VA[GTValues.LV]))

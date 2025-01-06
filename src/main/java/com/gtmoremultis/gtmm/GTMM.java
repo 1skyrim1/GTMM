@@ -3,7 +3,7 @@ package com.gtmoremultis.gtmm;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
 import com.gtmoremultis.gtmm.config.ConfigHandler;
-import com.lowdragmc.lowdraglib.CommonProxy;
+import com.gtmoremultis.gtmm.init.CommonProxy;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -18,11 +18,13 @@ public class GTMM {
     public static final Logger LOGGER = LogManager.getLogger();
 
     public GTMM() {
-        MinecraftForge.EVENT_BUS.register(this);
+//        MinecraftForge.EVENT_BUS.register(this);
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modEventBus.addGenericListener(MachineDefinition.class, GTMMRegistries::registerMachine);
+        modEventBus.register(this);
+        modEventBus.addGenericListener(MachineDefinition.class, GTMMRegistries::registerMachines);
         CommonProxy.init();
     }
+
 
     public static ConfigHandler.ClientConfigs getClientConfig() {
         return ConfigHandler.INSTANCE.Client;

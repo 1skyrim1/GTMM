@@ -6,7 +6,6 @@ import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMa
 import com.gregtechceu.gtceu.api.pattern.MultiblockState;
 import com.gregtechceu.gtceu.api.pattern.util.PatternMatchContext;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
-import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
 import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
@@ -18,9 +17,7 @@ import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.annotation.RequireRerender;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 import lombok.Getter;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 public class GTMMMachine extends WorkableElectricMultiblockMachine implements IGTmmMachine {
     private static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(GTMMMachine.class, WorkableElectricMultiblockMachine.MANAGED_FIELD_HOLDER);
@@ -62,7 +59,7 @@ public class GTMMMachine extends WorkableElectricMultiblockMachine implements IG
 
     // Recipe Logic
 
-    public static ModifierFunction GTMMRecipeModifier(MetaMachine machine, @Nonnull GTRecipe recipe) {
+    public static ModifierFunction GTMMRecipeModifier(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {
         if (machine instanceof GTMMMachine gtmmmachine) {
             if (RecipeHelper.getRecipeEUtTier(recipe) > gtmmmachine.getMachineCasingTier() + 1) {
                 return null;

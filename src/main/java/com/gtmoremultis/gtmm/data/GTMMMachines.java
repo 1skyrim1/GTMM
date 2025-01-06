@@ -47,11 +47,11 @@ public class GTMMMachines {
 
     // Machine
 
-    public static final MultiblockMachineDefinition CoAL = REGISTRATE.multiblock("coal", GTMMMachine::new)
+    public static final MultiblockMachineDefinition CoAL = REGISTRATE.multiblock("component_assembly_line", GTMMMachine::new)
             .rotationState(RotationState.ALL)
             .tooltips(Component.translatable("gtmm.multiblock.coal.tooltip"))
             .recipeTypes(GTMMRecipeTypes.CoAL_RECIPES)
-            .recipeModifier(GTMMMachine::GTMMRecipeModifier)
+            .recipeModifier(GTMMMachine::GTMMRecipeModifier, true)
             .appearanceBlock(GTMMCasingBlocks.IRIDIUM_MACHINE_CASING)
             .pattern(definition -> FactoryBlockPattern.start()
                     .aisle("CCCCCCCCC", "C  CCC  C", "C       C", "C       C", "C       C", "C       C", "CC     CC", " CCCCCCC ", "         ", "         ")

@@ -18,7 +18,8 @@ public final class GTMMRegistries {
     public static final GTRegistrate REGISTRATE = GTRegistrate.create(GTMM.MOD_ID);
     public static MaterialRegistry MATERIAL_REGISTRY;
 
-    public static void registerMachine(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> ignoredEvent){
+
+    public static void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event){
         GTMMMachines.init();
     }
 

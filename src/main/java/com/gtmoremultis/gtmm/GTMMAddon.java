@@ -22,7 +22,6 @@ public class GTMMAddon implements IGTAddon {
 
     @Override
     public void initializeAddon() {
-        GTMM.LOGGER.info("GTMM Loaded!");
     }
 
     @Override
