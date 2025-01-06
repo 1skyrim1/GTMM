@@ -4,7 +4,6 @@ import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.addon.events.KJSRecipeKeyEvent;
 import com.gregtechceu.gtceu.api.addon.events.MaterialCasingCollectionEvent;
-import com.gregtechceu.gtceu.api.registry.GTRegistries;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import com.gtmoremultis.gtmm.data.GTMMCasingBlocks;
 import com.gtmoremultis.gtmm.data.GTMMElement;
@@ -22,6 +21,7 @@ public class GTMMAddon implements IGTAddon {
 
     @Override
     public void initializeAddon() {
+
     }
 
     @Override

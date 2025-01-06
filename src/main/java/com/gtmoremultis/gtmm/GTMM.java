@@ -21,8 +21,8 @@ public class GTMM {
 //        MinecraftForge.EVENT_BUS.register(this);
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.register(this);
-        modEventBus.addGenericListener(MachineDefinition.class, GTMMRegistries::registerMachines);
         CommonProxy.init();
+        modEventBus.addGenericListener(MachineDefinition.class, GTMMRegistries::registerMachines);
     }
 
 
