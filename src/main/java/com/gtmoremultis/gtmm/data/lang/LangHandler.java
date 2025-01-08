@@ -1,41 +1,21 @@
 package com.gtmoremultis.gtmm.data.lang;
 
-
-import com.gregtechceu.gtceu.api.data.chemical.material.Material;
-import com.gtmoremultis.gtmm.GTMM;
+import com.gtmoremultis.gtmm.data.GTMMMaterials;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 
-public class LangHandler {
-    public static final LangHandler INSTANCE = new LangHandler();
-    private RegistrateLangProvider enLangProvider;
+public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
 
-    public static void enInitialize(RegistrateLangProvider provider) {
-        INSTANCE.enLangProvider = provider;
-        init();
-    }
+    public static void init(RegistrateLangProvider provider) {
+        // materials
+        replace(provider, GTMMMaterials.Infinity.getUnlocalizedName(), "Infinity");
+        replace(provider, GTMMMaterials.BlackMatter.getUnlocalizedName(), "Black Matter");
 
-    public static void tsl(String key, String en) {
-        INSTANCE.translate(key, en);
-    }
+        // blocks
+        replace(provider, "block.gtmm.iridium_machine_casing", "Iridium Machine Casing");
+        replace(provider, "block.gtmm.naquadah_machine_casing", "Naquadah Machine Casing");
 
-    public static void translateMaterial(Material material, String en) {
-        try {
-            INSTANCE.enLangProvider.add("material.gtceu." + material.getName(), en);
-        } catch (NullPointerException e) {
-            GTMM.LOGGER.error("Failed to translate material(EN)", e);
-        }
-    }
-
-
-    public static void init() {
-        MachineLang.init();
-        MaterialLang.init();
-        MiscLang.init();
-    }
-
-    public void translate(String key, String en) {
-        if (enLangProvider != null) {
-            enLangProvider.add(key, en);
-        }
+        // machines
+        provider.add("gtmm.multiblock.coal.parallel_level", "Max Parallels: %s");
+        provider.add("gtmm.multiblock.coal.tier", "Casing Tier: %s");
     }
 }

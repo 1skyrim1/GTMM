@@ -7,6 +7,6 @@ import static com.gtmoremultis.gtmm.GTMMRegistries.REGISTRATE;
 
 public class GTMMDataGen {
     public static void init() {
-        REGISTRATE.addDataGenerator(ProviderType.LANG, LangHandler::enInitialize);
+        REGISTRATE.addDataGenerator(ProviderType.LANG, LangHandler::init);
     }
 }
