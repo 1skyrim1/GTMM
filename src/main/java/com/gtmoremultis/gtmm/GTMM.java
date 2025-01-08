@@ -34,6 +34,7 @@ public class GTMM {
     }
 
     public static void init() {
+        ConfigHandler.init();
         ConfigHolder.init();
         GTMMBlocks.init();
         GTMMItems.init();
@@ -59,14 +60,6 @@ public class GTMM {
 
     public void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event){
         GTMMMachines.init();
-    }
-
-    public static ConfigHandler.ClientConfigs getClientConfig() {
-        return ConfigHandler.INSTANCE.Client;
-    }
-
-    public static ConfigHandler.ServerConfigs getServerConfig() {
-        return ConfigHandler.INSTANCE.Server;
     }
 
     public static ResourceLocation id(String path) {

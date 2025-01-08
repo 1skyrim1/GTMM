@@ -18,6 +18,7 @@ import com.lowdragmc.lowdraglib.syncdata.annotation.RequireRerender;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
+import com.gtmoremultis.gtmm.config.ConfigHandler;
 
 public class GTMMMachine extends WorkableElectricMultiblockMachine implements IGTmmMachine {
     private static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(GTMMMachine.class, WorkableElectricMultiblockMachine.MANAGED_FIELD_HOLDER);
@@ -30,7 +31,9 @@ public class GTMMMachine extends WorkableElectricMultiblockMachine implements IG
     private int tier;
     private MachineCasingType machineCasingType;
 
-    public GTMMMachine(IMachineBlockEntity holder) {super(holder);}
+    public GTMMMachine(IMachineBlockEntity holder) {
+        super(holder);
+    }
 
     @Override
     public void onStructureFormed() {
@@ -41,8 +44,11 @@ public class GTMMMachine extends WorkableElectricMultiblockMachine implements IG
         MultiblockState multiblockState = getMultiblockState();
         PatternMatchContext matchContext = multiblockState.getMatchContext();
 
+        MachineCasingType machineCasingType = matchContext.get("MachineCasing") instanceof MachineCasingType ? (MachineCasingType) matchContext.get("MachineCasing") : null;
+
         // Set type Variables
         this.machineCasingType = machineCasingType;
+        this.tier = getMachineCasingTier();
     }
 
 
@@ -65,7 +71,7 @@ public class GTMMMachine extends WorkableElectricMultiblockMachine implements IG
                 return null;
             }
 
-            var maxParallel = (int) (1 + Math.pow(4, gtmmmachine.getMachineCasingTier()));
+            var maxParallel = (int) (1 + Math.pow(ConfigHandler.INSTANCE.machine.parallelMultiplier, gtmmmachine.getMachineCasingTier()));
             var Parallellimit = Math.min(maxParallel, (int) (gtmmmachine.getMaxVoltage()));
             var euT = RecipeHelper.getInputEUt(recipe);
 

@@ -21,6 +21,7 @@ import com.gtmoremultis.gtmm.api.machine.multiblock.GTMMMachine;
 import com.gtmoremultis.gtmm.api.pattern.APredicates;
 import com.gtmoremultis.gtmm.block.BlockTier;
 import com.gtmoremultis.gtmm.block.MachineCasingBlock;
+import com.gtmoremultis.gtmm.config.ConfigHandler;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Blocks;
@@ -168,8 +169,8 @@ public class GTMMMachines {
             .renderer(() -> new WorkableCasingMachineRenderer(GTMM.id("block/casings/solid/iridium_machine_casing"), GTCEu.id("block/multiblock/assembly_line")))
             .additionalDisplay((controller, components) -> {
                 if (controller instanceof GTMMMachine gtmmMachine && controller.isFormed()) {
-                    components.add(Component.translatable("gtmm.multiblock.coal.parallel_level", Math.pow(4, gtmmMachine.getMachineCasingTier())));
                     components.add(Component.translatable("gtmm.multiblock.coal.tier", VNF[gtmmMachine.getMachineCasingTier()]));
+                    components.add(Component.translatable("gtmm.multiblock.coal.parallel_level", Math.pow(ConfigHandler.INSTANCE.machine.parallelMultiplier, gtmmMachine.getMachineCasingTier())));
                 }
             })
             .register();

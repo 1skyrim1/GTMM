@@ -8,26 +8,25 @@ import dev.toma.configuration.config.format.ConfigFormats;
 
 @Config(id = GTMM.MOD_ID)
 public class ConfigHandler {
-    public static ConfigHandler INSTANCE = Configuration.registerConfig(ConfigHandler.class, ConfigFormats.json()).getConfigInstance();
+    public static ConfigHandler INSTANCE;
+    private static final Object LOCK = new Object();
 
-    @Configurable
-    public ClientConfigs Client = new ClientConfigs();
-    @Configurable
-    public ServerConfigs Server = new ServerConfigs();
-
-    public static class ServerConfigs {
-        @Configurable
-        @Configurable.Comment({"Makes EMI Better", "Default: true"})
-        public boolean makesEMIBetter = true;
-        ServerConfigs() {
+    public static void init() {
+        synchronized (LOCK) {
+            if (INSTANCE == null) {
+                INSTANCE = Configuration.registerConfig(ConfigHandler.class, ConfigFormats.yaml()).getConfigInstance();
+            }
         }
     }
 
-    public static class ClientConfigs {
+    @Configurable
+    public MachineConfigs machine = new MachineConfigs();
+
+
+    public static class MachineConfigs {
+
         @Configurable
-        @Configurable.Comment({"Test Comment", "Default: false"})
-        public boolean test = false;
-        ClientConfigs() {
-        }
+        @Configurable.Comment({"Base for Parallel Logic (Base^(Casing Tier))", "Default: 4"})
+        public int parallelMultiplier = 4;
     }
 }

@@ -12,10 +12,5 @@ public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
 
         // blocks
         replace(provider, "block.gtmm.iridium_machine_casing", "Iridium Machine Casing");
-        replace(provider, "block.gtmm.naquadah_machine_casing", "Naquadah Machine Casing");
-
-        // machines
-        provider.add("gtmm.multiblock.coal.parallel_level", "Max Parallels: %s");
-        provider.add("gtmm.multiblock.coal.tier", "Casing Tier: %s");
     }
 }

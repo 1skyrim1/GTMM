@@ -1,7 +1,6 @@
 package com.gtmoremultis.gtmm.data;
 
 import com.gregtechceu.gtceu.api.item.tool.GTToolType;
-import com.gregtechceu.gtceu.common.data.GTModels;
 import com.gtmoremultis.gtmm.GTMM;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
@@ -25,7 +24,6 @@ public class GTMMCasingBlocks {
     }
 
     public static final BlockEntry<Block> IRIDIUM_MACHINE_CASING = createCasingBlock("iridium_machine_casing", GTMM.id("block/casings/solid/iridium_machine_casing"));
-
     public static final BlockEntry<Block> NAQUADAH_MACHINE_CASING = createCasingBlock("naquadah_machine_casing", GTMM.id("block/casings/solid/naquadah_machine_casing"));
 
 
@@ -44,7 +42,7 @@ public class GTMMCasingBlocks {
         return REGISTRATE.block(name, p -> (Block) blockSupplier.apply(p))
                 .initialProperties(properties)
                 .addLayer(type)
-                .blockstate(GTModels.cubeAllModel(name, texture))
+                .blockstate(GTMMModels.cubeAllModel(name, texture))
                 .tag(GTToolType.WRENCH.harvestTags.get(0), BlockTags.MINEABLE_WITH_PICKAXE)
                 .item(BlockItem::new)
                 .model(NonNullBiConsumer.noop())
