@@ -1,5 +1,5 @@
-w{
+{
     "ldlib": {
-        "connection": "gtnn:block/casings/solid/process_machine_casing_ctm"
+        "connection": "gtmm:block/casings/solid/iridium_machine_casing_ctm"
     }
 }

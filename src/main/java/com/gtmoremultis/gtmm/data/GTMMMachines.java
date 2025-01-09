@@ -50,7 +50,6 @@ public class GTMMMachines {
 
     public static final MultiblockMachineDefinition CoAL = REGISTRATE.multiblock("component_assembly_line", GTMMMachine::new)
             .rotationState(RotationState.ALL)
-            .tooltips(Component.translatable("gtmm.multiblock.coal.tooltip"))
             .recipeTypes(GTMMRecipeTypes.CoAL_RECIPES)
             .recipeModifier(GTMMMachine::GTMMRecipeModifier, true)
             .appearanceBlock(GTMMCasingBlocks.IRIDIUM_MACHINE_CASING)

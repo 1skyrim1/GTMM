@@ -1,0 +1,11 @@
+// 1.20.1	2025-01-08T20:52:52.9735807	Registrate Provider for gtmm [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+aa25d840d3c25833f85b154af9dda426330612fd assets/gtmm/blockstates/iridium_machine_casing.json
+3027e77985d5da5592feb0b5f8a0a58846d30932 assets/gtmm/blockstates/naquadah_machine_casing.json
+7a1d33416836ce2131f29cd5c5b52ab293508821 assets/gtmm/lang/en_ud.json
+87cabac14120f8f087dab4e54fe75313655dd7ef assets/gtmm/lang/en_us.json
+380d114c616bfbbfc081c03336177cbf089745b2 assets/gtmm/models/block/iridium_machine_casing.json
+466cf92507f69abf441cb0a32828918d515a783b assets/gtmm/models/block/naquadah_machine_casing.json
+bd0aa517ab25c1cdee15c975551f99cc43219a5d data/forge/tags/blocks/mineable/wrench.json
+321a489b42b05727a6f190ca9599312f625f9cc4 data/gtmm/loot_tables/blocks/iridium_machine_casing.json
+bbc3dee0d8b7897f72b1f91673429ff15f762b60 data/gtmm/loot_tables/blocks/naquadah_machine_casing.json
+bd0aa517ab25c1cdee15c975551f99cc43219a5d data/minecraft/tags/blocks/mineable/pickaxe.json

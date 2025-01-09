@@ -1,9 +1,10 @@
 {
-  "itemGroup.gtmm.main": "GT More Multis",
   "block.gtmm.component_assembly_line": "Component Assembly Line",
   "block.gtmm.iridium_machine_casing": "Iridium Machine Casing",
   "block.gtmm.naquadah_machine_casing": "Naquadah Machine Casing",
-  "gtmm.multiblock.coal.tooltip": "§cParallels: 4^(Machine Casing Tier)",
   "gtmm.multiblock.coal.parallel_level": "Max Parallels: %s",
-  "gtmm.multiblock.coal.tier": "Casing Tier: %s"
+  "gtmm.multiblock.coal.tier": "Casing Tier: %s",
+  "itemGroup.gtmm.main": "GT More Multis",
+  "material.gtceu.black_matter": "Black Matter",
+  "material.gtceu.infinity": "Infinity"
 }

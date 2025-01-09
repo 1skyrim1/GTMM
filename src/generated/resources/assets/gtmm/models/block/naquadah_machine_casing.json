@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "gtmm:block/casings/solid/naquadah_machine_casing"
+  }
+}

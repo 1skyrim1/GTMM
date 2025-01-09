@@ -26,7 +26,7 @@ public class ConfigHandler {
     public static class MachineConfigs {
 
         @Configurable
-        @Configurable.Comment({"Base for Parallel Logic (Base^(Casing Tier))", "Default: 4"})
-        public int parallelMultiplier = 4;
+        @Configurable.Comment({"Base for Parallel Logic (Base^(Casing Tier))", "Default: 2"})
+        public int parallelMultiplier = 2;
     }
 }
