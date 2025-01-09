@@ -169,7 +169,7 @@ public class GTMMMachines {
             .additionalDisplay((controller, components) -> {
                 if (controller instanceof GTMMMachine gtmmMachine && controller.isFormed()) {
                     components.add(Component.translatable("gtmm.multiblock.coal.tier", VNF[gtmmMachine.getMachineCasingTier()]));
-                    components.add(Component.translatable("gtmm.multiblock.coal.parallel_level", Math.pow(ConfigHandler.INSTANCE.machine.parallelMultiplier, gtmmMachine.getMachineCasingTier())));
+                    components.add(Component.translatable("gtmm.multiblock.coal.parallel_level", (int) Math.pow(ConfigHandler.INSTANCE.machine.parallelMultiplier, gtmmMachine.getMachineCasingTier() - ConfigHandler.INSTANCE.machine.casingParallel)));
                 }
             })
             .register();

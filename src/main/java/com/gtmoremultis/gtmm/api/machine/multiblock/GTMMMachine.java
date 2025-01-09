@@ -71,7 +71,7 @@ public class GTMMMachine extends WorkableElectricMultiblockMachine implements IG
                 return null;
             }
 
-            var maxParallel = (int) (1 + Math.pow(ConfigHandler.INSTANCE.machine.parallelMultiplier, gtmmmachine.getMachineCasingTier()));
+            var maxParallel = (int) (1 + Math.pow(ConfigHandler.INSTANCE.machine.parallelMultiplier, gtmmmachine.getMachineCasingTier() - ConfigHandler.INSTANCE.machine.casingParallel));
             var Parallellimit = Math.min(maxParallel, (int) (gtmmmachine.getMaxVoltage()));
             var euT = RecipeHelper.getInputEUt(recipe);
 

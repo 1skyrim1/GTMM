@@ -20,5 +20,7 @@ public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
 
         // errors
         provider.add("gtmm.multiblock.pattern.error.machine_casing", "All Machine Casings must be the same");
+
+        // Configs
     }
 }

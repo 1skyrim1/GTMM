@@ -28,5 +28,8 @@ public class ConfigHandler {
         @Configurable
         @Configurable.Comment({"Base for Parallel Logic (Base^(Casing Tier))", "Default: 2"})
         public int parallelMultiplier = 2;
+        @Configurable
+        @Configurable.Comment({"Casing irgendwas. Keine Ahnung mir fällt grad nix ein. Das ist (Base^(Casing Tier - das hier))", "Default: 2 (MV)"})
+        public int casingParallel = 2;
     }
 }

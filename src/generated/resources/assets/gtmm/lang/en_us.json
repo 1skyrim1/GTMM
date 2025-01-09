@@ -4,6 +4,7 @@
   "block.gtmm.naquadah_machine_casing": "Naquadah Machine Casing",
   "gtmm.multiblock.coal.parallel_level": "Max Parallels: %s",
   "gtmm.multiblock.coal.tier": "Casing Tier: %s",
+  "gtmm.multiblock.pattern.error.machine_casing": "All Machine Casings must be the same",
   "itemGroup.gtmm.main": "GT More Multis",
   "material.gtceu.black_matter": "Black Matter",
   "material.gtceu.infinity": "Infinity"
