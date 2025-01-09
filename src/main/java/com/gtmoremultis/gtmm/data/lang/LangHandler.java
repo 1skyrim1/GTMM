@@ -19,6 +19,6 @@ public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
         provider.add("gtmm.multiblock.coal.parallel_level", "Max Parallels: %s");
 
         // errors
-        provider.add("gtmm.multiblock.pattern.error.machine_casing", "All Machine Casings must be the same")
+        provider.add("gtmm.multiblock.pattern.error.machine_casing", "All Machine Casings must be the same");
     }
 }
