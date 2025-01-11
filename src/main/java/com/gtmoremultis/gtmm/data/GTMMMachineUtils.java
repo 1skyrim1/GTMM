@@ -23,43 +23,43 @@ import static com.gtmoremultis.gtmm.GTMMRegistries.REGISTRATE;
 public class GTMMMachineUtils {
 
     public static MachineDefinition[] registerWirelessHatch(IO io, int amperage, PartAbility ability) {
-        String name = io == IO.IN ? "input" : "output";
-        return registerTieredMachines(amperage + "a_wireless_energy_" + name + "_hatch",
+        String name = io == IO.IN ? "energy" : "dynamo";
+        return registerTieredMachines(amperage + "a_wireless_" + name + "_hatch",
                 (holder, tier) -> new WirelessEnergyHatchPartMachine(holder, io, tier, amperage),
                 (tier, builder) -> builder
-                        .langValue(VNF[tier] + "§r " + FormattingUtil.formatNumbers(amperage) + " §eA§r Wireless " + FormattingUtil.toEnglishName(name) + " Hatch")
+                        .langValue(VNF[tier] + "§r " + FormattingUtil.formatNumbers(amperage) + "§eA§r Wireless " + FormattingUtil.toEnglishName(name) + " Hatch")
                         .rotationState(RotationState.ALL)
-                        .tooltips(Component.translatable("gtmm.machine.wireless_energy_hatch.both.tooltip"),
-                                Component.translatable("gtmm.machine.wireless_energy_hatch." + name + ".tooltip"),
+                        .tooltips(Component.translatable("gtmm.machine.wireless_hatch.both.tooltip"),
+                                Component.translatable("gtmm.machine.wireless_hatch." + name + ".tooltip"),
                                 Component.translatable("gtceu.universal.tooltip.voltage_" + (io == IO.IN ? "in" : "out"),
                                         FormattingUtil.formatNumbers(V[tier]), VNF[tier]),
-                                Component.translatable("gtceu.universal.tooltip.amperage_in", amperage),
+                                Component.translatable("gtceu.universal.tooltip.amperage_" + (io == IO.IN ? "in" : "out"), amperage),
                                 Component.translatable("gtceu.universal.tooltip.energy_storage_capacity",
                                         FormattingUtil.formatNumbers(WirelessEnergyHatchPartMachine.getHatchEnergyCapacity(tier, amperage))),
                                 Component.translatable("gtceu.universal.disabled"))
                         .abilities(ability)
-                        .overlayTieredHullRenderer("wireless_energy_hatch." + name)
+                        .overlayTieredHullRenderer("wireless_" + name + "_hatch")
                         .register(),
                 ConfigHandler.INSTANCE.machine.enable_low_tier_wireless ? ELECTRIC_TIERS : HIGH_TIERS);
     }
 
     public static MachineDefinition[] registerHighTierWirelessHatch(IO io, int amperage, PartAbility ability) {
         String name = io == IO.IN ? "energy" : "dynamo";
-        return registerTieredMachines(amperage + "a_wireless_energy_" + name + "_hatch",
+        return registerTieredMachines(amperage + "a_wireless_" + name + "_hatch",
                 (holder, tier) -> new WirelessEnergyHatchPartMachine(holder, io, tier, amperage),
                 (tier, builder) -> builder
                         .langValue(VNF[tier] + "§r " + FormattingUtil.formatNumbers(amperage) + "§eA§r Wireless " + FormattingUtil.toEnglishName(name) + " Hatch")
                         .rotationState(RotationState.ALL)
-                        .tooltips(Component.translatable("gtmm.machine.wireless_energy_hatch.both.tooltip"),
-                                Component.translatable("gtmm.machine.wireless_energy_hatch." + name + ".tooltip"),
+                        .tooltips(Component.translatable("gtmm.machine.wireless_hatch.both.tooltip"),
+                                Component.translatable("gtmm.machine.wireless_hatch." + name + ".tooltip"),
                                 Component.translatable("gtceu.universal.tooltip.voltage_" + (io == IO.IN ? "in" : "out"),
                                         FormattingUtil.formatNumbers(V[tier]), VNF[tier]),
-                                Component.translatable("gtceu.universal.tooltip.amperage_in", amperage),
+                                Component.translatable("gtceu.universal.tooltip.amperage_" + (io == IO.IN ? "in" : "out"), amperage),
                                 Component.translatable("gtceu.universal.tooltip.energy_storage_capacity",
                                         FormattingUtil.formatNumbers(WirelessEnergyHatchPartMachine.getHatchEnergyCapacity(tier, amperage))),
                                 Component.translatable("gtceu.universal.disabled"))
                         .abilities(ability)
-                        .overlayTieredHullRenderer("wireless_energy_hatch")
+                        .overlayTieredHullRenderer("wireless_" + name + "_hatch")
                         .register(),
                 OpV);
     }

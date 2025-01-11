@@ -1,0 +1,6 @@
+{
+  "parent": "gtceu:block/overlay/front",
+  "textures": {
+    "overlay": "gtmm:block/overlay/machine/overlay_wireless_dynamo_hatch"
+  }
+}

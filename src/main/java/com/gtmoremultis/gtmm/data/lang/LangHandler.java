@@ -15,9 +15,9 @@ public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
         // replace(provider, "block.gtmm.naquadah_machine_casing", "Naquadah Machine Casing");
 
         // Wireless Energy Hatches
-        provider.add("gtmm.machine.wireless_energy_hatch.input.tooltip", "Does not connect to wires. This block withdraws EU from the network.");
-        provider.add("gtmm.machine.wireless_energy_hatch.output.tooltip", "Does not connect to wires. This block accepts EU into the network.");
-        provider.add("gtmm.machine.wireless_energy_hatch.both.tooltip", "Stores energy globally in a network, up to 2^(2^31) EU.");
+        provider.add("gtmm.machine.wireless_hatch.energy.tooltip", "Does not connect to wires. This block withdraws EU from the network.");
+        provider.add("gtmm.machine.wireless_hatch.dynamo.tooltip", "Does not connect to wires. This block accepts EU into the network.");
+        provider.add("gtmm.machine.wireless_hatch.both.tooltip", "Stores energy globally in a network, up to 2^(2^31) EU.");
 
         // tooltips
         provider.add("gtmm.multiblock.coal.tier", "Casing Tier: %s");
