@@ -1,10 +1,12 @@
-// 1.20.1	2025-01-09T11:19:15.036487	Registrate Provider for gtmm [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+// 1.20.1	2025-01-11T01:48:14.7016218	Registrate Provider for gtmm [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
 aa25d840d3c25833f85b154af9dda426330612fd assets/gtmm/blockstates/iridium_machine_casing.json
 3027e77985d5da5592feb0b5f8a0a58846d30932 assets/gtmm/blockstates/naquadah_machine_casing.json
-8aaafce18940ef35cefe78945b4285f8da415682 assets/gtmm/lang/en_ud.json
-e583d3d8aa9684f57419f0666907f93c169f9d46 assets/gtmm/lang/en_us.json
+f3c78433425a738496c0a76558d70e04169bd9d7 assets/gtmm/lang/en_ud.json
+8ec17ce4e4ffd10c68c64154e9cb6b527100b848 assets/gtmm/lang/en_us.json
 380d114c616bfbbfc081c03336177cbf089745b2 assets/gtmm/models/block/iridium_machine_casing.json
 466cf92507f69abf441cb0a32828918d515a783b assets/gtmm/models/block/naquadah_machine_casing.json
+da405dae981cfd965443c2703a1da26028ca39fe assets/gtmm/models/item/iridium_machine_casing.json
+96d86155da5193c2b72f0ef1d8c723eb0a271944 assets/gtmm/models/item/naquadah_machine_casing.json
 bd0aa517ab25c1cdee15c975551f99cc43219a5d data/forge/tags/blocks/mineable/wrench.json
 321a489b42b05727a6f190ca9599312f625f9cc4 data/gtmm/loot_tables/blocks/iridium_machine_casing.json
 bbc3dee0d8b7897f72b1f91673429ff15f762b60 data/gtmm/loot_tables/blocks/naquadah_machine_casing.json

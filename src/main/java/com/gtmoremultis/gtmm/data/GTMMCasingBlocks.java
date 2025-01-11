@@ -45,7 +45,6 @@ public class GTMMCasingBlocks {
                 .blockstate(GTMMModels.cubeAllModel(name, texture))
                 .tag(GTToolType.WRENCH.harvestTags.get(0), BlockTags.MINEABLE_WITH_PICKAXE)
                 .item(BlockItem::new)
-                .model(NonNullBiConsumer.noop())
                 .build()
                 .register();
     }

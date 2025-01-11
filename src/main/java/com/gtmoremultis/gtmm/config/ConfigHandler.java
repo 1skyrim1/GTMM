@@ -26,10 +26,13 @@ public class ConfigHandler {
     public static class MachineConfigs {
 
         @Configurable
-        @Configurable.Comment({"Base for Parallel Logic (Base^(Casing Tier))", "Default: 2"})
+        @Configurable.Comment({"Base for Parallel Logic (Base^(Casing Tier))", "Default: 4"})
         public int parallelMultiplier = 2;
         @Configurable
-        @Configurable.Comment({"Casing irgendwas. Keine Ahnung mir fällt grad nix ein. Das ist (Base^(Casing Tier - das hier))", "Default: 2 (MV)"})
+        @Configurable.Comment({"Casing irgendwas. Keine Ahnung mir fällt grad nix ein. Das ist (Base^(Casing Tier - das hier))", "Default: 0"})
         public int casingParallel = 2;
+        @Configurable
+        @Configurable.Comment({"Enable Wireless Energy Hatches for Low Tiers?", "Default: false"})
+        public boolean enable_low_tier_wireless = false;
     }
 }

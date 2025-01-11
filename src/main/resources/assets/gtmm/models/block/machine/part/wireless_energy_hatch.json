@@ -1,0 +1,6 @@
+{
+  "parent": "gtceu:block/overlay/tinted/front_2",
+  "textures": {
+    "overlay": "gtmm:block/overlay/machine/overlay_wireless_energy_input"
+  }
+}

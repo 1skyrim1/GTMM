@@ -2,18 +2,11 @@ package com.gtmoremultis.gtmm.api.machine.multiblock;
 
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 
-import javax.annotation.Nullable;
-import java.util.function.Supplier;
-
 public class APartAbility extends PartAbility {
-    public static final PartAbility WIRELESS_ENERGY_HATCH = new PartAbility("wireless_energy_hatch");
+    public static final PartAbility INPUT_WIRELESS_ENERGY = new PartAbility("input_wireless_energy");
+    public static final PartAbility OUTPUT_WIRELESS_ENERGY = new PartAbility("output_wireless_energy");
 
     public APartAbility(String name) {
         super(name);
-    }
-
-    public static <T> T getOrDefault(@Nullable T value, Supplier<T> defaultSupplier) {
-        if (value == null) return defaultSupplier.get();
-        return value;
     }
 }

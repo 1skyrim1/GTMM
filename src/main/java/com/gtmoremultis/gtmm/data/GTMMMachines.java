@@ -2,21 +2,22 @@ package com.gtmoremultis.gtmm.data;
 
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
+import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
+import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
-import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.client.renderer.machine.WorkableCasingMachineRenderer;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMachines;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
-import com.gregtechceu.gtceu.common.data.machines.GCYMMachines;
 import com.gtmoremultis.gtmm.GTMM;
+import com.gtmoremultis.gtmm.api.machine.multiblock.APartAbility;
 import com.gtmoremultis.gtmm.api.machine.multiblock.GTMMMachine;
 import com.gtmoremultis.gtmm.api.pattern.APredicates;
 import com.gtmoremultis.gtmm.block.BlockTier;
@@ -33,6 +34,7 @@ import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.abilities;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.autoAbilities;
 import static com.gtmoremultis.gtmm.GTMMRegistries.REGISTRATE;
+import static com.gtmoremultis.gtmm.data.GTMMMachineUtils.*;
 
 @SuppressWarnings("unused")
 public class GTMMMachines {
@@ -44,7 +46,33 @@ public class GTMMMachines {
     }
     // Part
 
-//    public static final MachineDefinition[] WIRELESS_ENERGY_HATCH = REGISTRATE.machine("wireless_energy_hatch", )
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH = registerWirelessHatch(IO.IN, 1, APartAbility.INPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH = registerWirelessHatch(IO.OUT, 1, APartAbility.OUTPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_4 = registerWirelessHatch(IO.IN, 4, APartAbility.INPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_4 = registerWirelessHatch(IO.OUT, 4, APartAbility.OUTPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_16 = registerWirelessHatch(IO.IN, 16, APartAbility.INPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_16 = registerWirelessHatch(IO.OUT, 16, APartAbility.OUTPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_64 = registerWirelessHatch(IO.IN, 64, APartAbility.INPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_64 = registerWirelessHatch(IO.OUT, 64, APartAbility.OUTPUT_WIRELESS_ENERGY);
+
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_256 = registerHighTierWirelessHatch(IO.IN, 256, APartAbility.INPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_256 = registerHighTierWirelessHatch(IO.OUT, 256, APartAbility.OUTPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_1024 = registerHighTierWirelessHatch(IO.IN, 1024, APartAbility.INPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_1024 = registerHighTierWirelessHatch(IO.OUT, 1024, APartAbility.OUTPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_4096 = registerHighTierWirelessHatch(IO.IN, 4096, APartAbility.INPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_4096 = registerHighTierWirelessHatch(IO.OUT, 4096, APartAbility.OUTPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_16384 = registerHighTierWirelessHatch(IO.IN, 16384, APartAbility.INPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_16384 = registerHighTierWirelessHatch(IO.OUT, 16384, APartAbility.OUTPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_65536 = registerHighTierWirelessHatch(IO.IN, 65536, APartAbility.INPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_65536 = registerHighTierWirelessHatch(IO.OUT, 65536, APartAbility.OUTPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_262144 = registerHighTierWirelessHatch(IO.IN, 262144, APartAbility.INPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_262144 = registerHighTierWirelessHatch(IO.OUT, 262144, APartAbility.OUTPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_1048576 = registerHighTierWirelessHatch(IO.IN, 1048576, APartAbility.INPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_1048576 = registerHighTierWirelessHatch(IO.OUT, 1048576, APartAbility.OUTPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_4194304 = registerHighTierWirelessHatch(IO.IN, 4194304, APartAbility.INPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_4194304 = registerHighTierWirelessHatch(IO.OUT, 4194304, APartAbility.OUTPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_16777216 = registerHighTierWirelessHatch(IO.IN, 16777216, APartAbility.INPUT_WIRELESS_ENERGY);
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_16777216 = registerHighTierWirelessHatch(IO.OUT, 16777216, APartAbility.OUTPUT_WIRELESS_ENERGY);
 
     // Machine
 
@@ -92,6 +120,7 @@ public class GTMMMachines {
                             .or(autoAbilities(true, false, false))
                             .or(abilities(PartAbility.INPUT_ENERGY).setMaxGlobalLimited(2, 1))
                             .or(abilities(PartAbility.INPUT_LASER).setMaxGlobalLimited(1, 1))
+                            .or(abilities(APartAbility.INPUT_WIRELESS_ENERGY).setMaxGlobalLimited(1, 1))
                             .or(abilities(PartAbility.IMPORT_ITEMS))
                             .or(abilities(PartAbility.EXPORT_ITEMS))
                             .or(abilities(PartAbility.IMPORT_FLUIDS))
