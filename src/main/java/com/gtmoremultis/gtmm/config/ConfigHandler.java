@@ -34,5 +34,9 @@ public class ConfigHandler {
         @Configurable
         @Configurable.Comment({"Enable Wireless Energy Hatches for Low Tiers?", "Default: false"})
         public boolean enable_low_tier_wireless = false;
+
+        @Configurable
+        @Configurable.Comment({"How long the HPCA can", "Max: 15", "Min: 3", "Default: 15"})
+        public int hpca_length = 15;
     }
 }

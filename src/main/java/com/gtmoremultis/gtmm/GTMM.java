@@ -1,6 +1,7 @@
 package com.gtmoremultis.gtmm;
 
 import com.gregtechceu.gtceu.api.GTCEuAPI;
+import com.gregtechceu.gtceu.api.cover.CoverDefinition;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.registry.MaterialRegistry;
@@ -25,23 +26,21 @@ public class GTMM {
     public static MaterialRegistry MATERIAL_REGISTRY;
 
     public GTMM() {
-        GTMM.init();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        ConfigHolder.init();
+        GTMMRegistries.REGISTRATE.registerRegistrate();
+        init();
         modEventBus.register(this);
 
         modEventBus.addGenericListener(GTRecipeType.class, this::registerRecipeTypes);
         modEventBus.addGenericListener(MachineDefinition.class, this::registerMachines);
+        modEventBus.addGenericListener(CoverDefinition.class, this::registerCovers);
     }
 
     public static void init() {
         ConfigHandler.init();
-        ConfigHolder.init();
         GTMMBlocks.init();
-        GTMMItems.init();
-
         GTMMDataGen.init();
-
-        GTMMRegistries.REGISTRATE.registerRegistrate();
     }
 
     @SubscribeEvent
@@ -60,6 +59,10 @@ public class GTMM {
 
     public void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event){
         GTMMMachines.init();
+    }
+
+    public void registerCovers(GTCEuAPI.RegisterEvent<ResourceLocation, CoverDefinition> event) {
+        GTMMItems.init();
     }
 
     public static ResourceLocation id(String path) {

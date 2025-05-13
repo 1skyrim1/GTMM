@@ -1,8 +1,6 @@
 package com.gtmoremultis.gtmm.data;
 
 import com.gregtechceu.gtceu.GTCEu;
-import com.gregtechceu.gtceu.api.GTValues;
-import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
@@ -12,10 +10,13 @@ import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
+import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
 import com.gregtechceu.gtceu.client.renderer.machine.WorkableCasingMachineRenderer;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMachines;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
+import com.gregtechceu.gtceu.common.data.machines.GTResearchMachines;
+import com.gregtechceu.gtceu.common.machine.multiblock.part.AutoMaintenanceHatchPartMachine;
 import com.gtmoremultis.gtmm.GTMM;
 import com.gtmoremultis.gtmm.api.machine.multiblock.APartAbility;
 import com.gtmoremultis.gtmm.api.machine.multiblock.GTMMMachine;
@@ -31,6 +32,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.*;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
+import static com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.*;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.abilities;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.autoAbilities;
 import static com.gtmoremultis.gtmm.GTMMRegistries.REGISTRATE;
@@ -42,6 +44,32 @@ public class GTMMMachines {
     }
     // Machine
 
+    // Quantum Computer
+/*    public static final MultiblockMachineDefinition QUANTUM_COMPUTER = REGISTRATE.multiblock("quantum_computer", HPCAMachine::new)
+            .langValue("Quantum Computer")
+            .rotationState(RotationState.ALL)
+            .appearanceBlock(GTBlocks.COMPUTER_CASING)
+            .recipeTypes(GTRecipeTypes.DUMMY_RECIPES)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("AA", "CC", "CC", "CC", "AA")
+                    .aisle("VA", "XV", "XV", "XV", "VA")
+                    .aisle("VA", "XV", "XV", "XV", "VA")
+                    .aisle("VA", "XV", "XV", "XV", "VA")
+                    .aisle("SA", "CC", "CC", "CC", "AA")
+                    .where('S', Predicates.controller(Predicates.blocks(definition.getBlock())))
+                    .where('A', Predicates.blocks(GTBlocks.ADVANCED_COMPUTER_CASING.get()))
+                    .where('V', Predicates.blocks(GTBlocks.COMPUTER_HEAT_VENT.get()))
+                    .where('X', abilities(PartAbility.HPCA_COMPONENT))
+                    .where('C', Predicates.blocks(GTBlocks.COMPUTER_CASING.get()).setMinGlobalLimited(5)
+                            .or(abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2, 1))
+                            .or(abilities(PartAbility.IMPORT_FLUIDS).setMaxGlobalLimited(1))
+                            .or(abilities(PartAbility.COMPUTATION_DATA_TRANSMISSION).setExactLimit(1))
+                            .or(autoAbilities(true, false, false)))
+                    .build())
+            .renderer(() -> new WorkableCasingMachineRenderer(GTCEu.id("block/casings/hpca/computer_casing"), GTCEu.id("block/multiblock/hpca")))
+            .register();*/
+
+    // CoAL
     public static final MultiblockMachineDefinition CoAL = REGISTRATE.multiblock("component_assembly_line", GTMMMachine::new)
             .rotationState(RotationState.ALL)
             .recipeTypes(GTMMRecipeTypes.CoAL_RECIPES)
@@ -174,10 +202,20 @@ public class GTMMMachines {
     }
 
     private static void modifyGT() {
-//        var largeAssembler = GCYMMachines.LARGE_ASSEMBLER;
-//        var gtRecipeTypes = new ArrayList<>(Arrays.asList(Objects.requireNonNull(largeAssembler.getRecipeTypes())));
-//        gtRecipeTypes.add(GTMMRecipeTypes.PRECISION_ASSEMBLY_RECIPES);
-//        GTRecipeType[] gtRecipeTypesArray = gtRecipeTypes.toArray(GTRecipeType[]::new);
-//        largeAssembler.setRecipeTypes(gtRecipeTypesArray);
+        MultiblockMachineDefinition definition = (MultiblockMachineDefinition) GTResearchMachines.HIGH_PERFORMANCE_COMPUTING_ARRAY;
+        definition.setPatternFactory(() -> FactoryBlockPattern.start()
+                .aisle("AA", "CC", "CC", "CC", "AA")
+                .aisle("VA", "XV", "XV", "XV", "VA").setRepeatable(3, Math.max(3, Math.min(15, ConfigHandler.INSTANCE.machine.hpca_length)))
+                .aisle("SA", "CC", "CC", "CC", "AA")
+                .where('S', Predicates.controller(Predicates.blocks(definition.getBlock())))
+                .where('A', Predicates.blocks(GTBlocks.ADVANCED_COMPUTER_CASING.get()))
+                .where('V', Predicates.blocks(GTBlocks.COMPUTER_HEAT_VENT.get()))
+                .where('X', abilities(PartAbility.HPCA_COMPONENT))
+                .where('C', Predicates.blocks(GTBlocks.COMPUTER_CASING.get()).setMinGlobalLimited(5)
+                        .or(abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2, 1))
+                        .or(abilities(PartAbility.IMPORT_FLUIDS).setMaxGlobalLimited(1))
+                        .or(abilities(PartAbility.COMPUTATION_DATA_TRANSMISSION).setExactLimit(1))
+                        .or(autoAbilities(true, false, false)))
+                .build());
     }
 }

@@ -14,6 +14,7 @@ public class GTMMItems {
 
     public static ItemEntry<ComponentItem> ADVANCED_TERMINAL = REGISTRATE
             .item("advanced_terminal", ComponentItem::create)
+            .lang("Advanced Terminal")
             .properties(p -> p.stacksTo(1))
             .onRegister(attach(new AdvancedTerminalBehaviour())).register();
 

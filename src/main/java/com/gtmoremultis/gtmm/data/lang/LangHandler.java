@@ -13,11 +13,11 @@ public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
         // Advanced Terminal
         provider.add("item.gtmm.advanced_terminal.setting.title", "Advanced Terminal Setting");
         provider.add("item.gtmm.advanced_terminal.setting.1", "Coil Tier");
-        provider.add("item.gtmm.advanced_terminal.setting.1.tooltip", "1.tooltip");     // Hier fehlt was!!
-        provider.add("item.gtmm.advanced_terminal.setting.2", "Repeat Count???");       // Hier auch
-        provider.add("item.gtmm.advanced_terminal.setting.2.tooltip", "2.tooltip");     // Hier auch
-        provider.add("item.gtmm.advanced_terminal.setting.3", "Build Hatches? (0: Yes|1: No");
-        provider.add("item.gtmm.advanced_terminal.setting.3.tooltip", "3.tooltip");     // Hier aber auch noch
+        provider.add("item.gtmm.advanced_terminal.setting.1.tooltip", "Sets the Coil Tier to:");
+        provider.add("item.gtmm.advanced_terminal.setting.2", "Repetitions (e.g. assline)");
+        provider.add("item.gtmm.advanced_terminal.setting.2.tooltip", "Sets the amount of repetitions for multiblocks like the assline");
+        provider.add("item.gtmm.advanced_terminal.setting.3", "Build Hatches?");
+        provider.add("item.gtmm.advanced_terminal.setting.3.tooltip", "0: Build Hatches\n1: Don't build Hatches");
 
         // errors
         provider.add("gtmm.multiblock.pattern.error.machine_casing", "All Machine Casings must be the same");
