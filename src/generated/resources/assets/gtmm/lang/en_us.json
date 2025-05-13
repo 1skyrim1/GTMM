@@ -1,5 +1,6 @@
 {
   "block.gtmm.component_assembly_line": "Component Assembly Line",
+  "block.gtmm.creative_energy_hatch": "Creative Energy Input Hatch",
   "block.gtmm.iridium_machine_casing": "Iridium Machine Casing",
   "block.gtmm.naquadah_machine_casing": "Naquadah Machine Casing",
   "config.gtmm.option.casingParallel": "IDK, this is (Base^(Casing Tier - this)) (Default: 0)",

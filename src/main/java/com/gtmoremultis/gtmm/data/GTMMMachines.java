@@ -19,6 +19,7 @@ import com.gregtechceu.gtceu.common.data.machines.GTResearchMachines;
 import com.gregtechceu.gtceu.common.machine.multiblock.part.AutoMaintenanceHatchPartMachine;
 import com.gtmoremultis.gtmm.GTMM;
 import com.gtmoremultis.gtmm.api.machine.multiblock.APartAbility;
+import com.gtmoremultis.gtmm.api.machine.multiblock.CreativeEnergyHatchPartMachine;
 import com.gtmoremultis.gtmm.api.machine.multiblock.GTMMMachine;
 import com.gtmoremultis.gtmm.api.pattern.APredicates;
 import com.gtmoremultis.gtmm.block.BlockTier;
@@ -44,30 +45,14 @@ public class GTMMMachines {
     }
     // Machine
 
-    // Quantum Computer
-/*    public static final MultiblockMachineDefinition QUANTUM_COMPUTER = REGISTRATE.multiblock("quantum_computer", HPCAMachine::new)
-            .langValue("Quantum Computer")
+    // Creative Energy Hatch
+    public static final MachineDefinition CREATIVE_ENERGY_INPUT_HATCH = REGISTRATE.machine("creative_energy_hatch", CreativeEnergyHatchPartMachine::new)
+            .langValue("Creative Energy Input Hatch")
             .rotationState(RotationState.ALL)
-            .appearanceBlock(GTBlocks.COMPUTER_CASING)
-            .recipeTypes(GTRecipeTypes.DUMMY_RECIPES)
-            .pattern(definition -> FactoryBlockPattern.start()
-                    .aisle("AA", "CC", "CC", "CC", "AA")
-                    .aisle("VA", "XV", "XV", "XV", "VA")
-                    .aisle("VA", "XV", "XV", "XV", "VA")
-                    .aisle("VA", "XV", "XV", "XV", "VA")
-                    .aisle("SA", "CC", "CC", "CC", "AA")
-                    .where('S', Predicates.controller(Predicates.blocks(definition.getBlock())))
-                    .where('A', Predicates.blocks(GTBlocks.ADVANCED_COMPUTER_CASING.get()))
-                    .where('V', Predicates.blocks(GTBlocks.COMPUTER_HEAT_VENT.get()))
-                    .where('X', abilities(PartAbility.HPCA_COMPONENT))
-                    .where('C', Predicates.blocks(GTBlocks.COMPUTER_CASING.get()).setMinGlobalLimited(5)
-                            .or(abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2, 1))
-                            .or(abilities(PartAbility.IMPORT_FLUIDS).setMaxGlobalLimited(1))
-                            .or(abilities(PartAbility.COMPUTATION_DATA_TRANSMISSION).setExactLimit(1))
-                            .or(autoAbilities(true, false, false)))
-                    .build())
-            .renderer(() -> new WorkableCasingMachineRenderer(GTCEu.id("block/casings/hpca/computer_casing"), GTCEu.id("block/multiblock/hpca")))
-            .register();*/
+            .overlayTieredHullRenderer("energy_hatch.input")
+            .abilities(PartAbility.INPUT_ENERGY)
+            .tier(MAX)
+            .register();
 
     // CoAL
     public static final MultiblockMachineDefinition CoAL = REGISTRATE.multiblock("component_assembly_line", GTMMMachine::new)
