@@ -55,6 +55,7 @@ public class AdvancedBlockPattern extends BlockPattern {
     static Direction[] FACINGS_H = { Direction.SOUTH, Direction.NORTH, Direction.WEST, Direction.EAST };
 
     public final int[][] aisleRepetitions;
+    public final boolean flipped = false;
     public final RelativeDirection[] structureDir;
     protected final TraceabilityPredicate[][][] blockMatches; // [z][y][x]
     protected final int fingerLength; // z size
@@ -119,7 +120,8 @@ public class AdvancedBlockPattern extends BlockPattern {
         BlockPos centerPos = controller.self().getPos();
         Direction facing = controller.self().getFrontFacing();
         Direction upwardsFacing = controller.self().getUpwardsFacing();
-        boolean isFlipped = controller.self().isFlipped();
+//        boolean isFlipped = controller.self().isFlipped();
+        boolean isFlipped = autoBuildSetting.getFlipped() != 0;
         Map<SimplePredicate, Integer> cacheGlobal = worldState.getGlobalCount();
         Map<SimplePredicate, Integer> cacheLayer = worldState.getLayerCount();
         Map<BlockPos, Object> blocks = new HashMap<>();

@@ -95,7 +95,11 @@ public class AdvancedTerminalBehaviour implements IItemUIFactory {
                         .addWidget(new LabelWidget(4, 5 + 16 * rowIndex, Component.translatable("item.gtmm.advanced_terminal.setting.3").getString())
                                 .setHoverTooltips("item.gtmm.advanced_terminal.setting.3.tooltip"))
                         .addWidget(new TerminalInputWidget(140, 5 + 16 * rowIndex++, 20, 16, autoBuildSetting::getNoHatchMode,
-                                this::setIsBuildHatches).setMin(0).setMax(1)));
+                                this::setIsBuildHatches).setMin(0).setMax(1))
+                        .addWidget(new LabelWidget(4, 5 + 16 * rowIndex, Component.translatable("item.gtmm.advanced_terminal.setting.4").getString())
+                                .setHoverTooltips("item.gtmm.advanced_terminal.setting.4.tooltip"))
+                        .addWidget(new TerminalInputWidget(140, 5 + 16 * rowIndex++, 20, 16, autoBuildSetting::getFlipped,
+                                this::setIsFlipped).setMin(0).setMax(1)));
         group.setBackground(GuiTextures.BACKGROUND_INVERSE);
         return group;
     }
@@ -145,19 +149,28 @@ public class AdvancedTerminalBehaviour implements IItemUIFactory {
         this.itemStack.setTag(tag);
     }
 
+    private void setIsFlipped(int isFlipped) {
+        autoBuildSetting.setFlipped(isFlipped);
+        var tag = this.itemStack.getTag();
+        if (tag == null) tag = new CompoundTag();
+        tag.putInt("Flipped", isFlipped);
+        this.itemStack.setTag(tag);
+    }
+
     @Setter
     @Getter
     public static class AutoBuildSetting {
 
         public static final Set<String> HATCH_NAMES = new HashSet<>(Set.of("input_hatch", "output_hatch", "input_bus", "output_bus", "laser_target", "laser_source",
-                "transmitter_hatch", "receiver_hatch", "maintenance_hatch", "parallel_hatch", "import_bus", "export_bus"));
+                "transmitter_hatch", "receiver_hatch", "maintenance_hatch", "parallel_hatch", "import_bus", "export_bus", "muffler_hatch"));
 
-        private int coilTier, repeatCount, noHatchMode;
+        private int coilTier, repeatCount, noHatchMode, flipped;
 
         public AutoBuildSetting() {
             this.coilTier = 0;
             this.repeatCount = 0;
             this.noHatchMode = 1;
+            this.flipped = 0;
         }
 
         public List<ItemStack> apply(BlockInfo[] blockInfos) {

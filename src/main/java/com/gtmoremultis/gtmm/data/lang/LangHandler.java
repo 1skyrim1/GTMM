@@ -18,6 +18,8 @@ public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
         provider.add("item.gtmm.advanced_terminal.setting.2.tooltip", "Sets the amount of repetitions for multiblocks like the assline");
         provider.add("item.gtmm.advanced_terminal.setting.3", "Build Hatches?");
         provider.add("item.gtmm.advanced_terminal.setting.3.tooltip", "0: Build Hatches\n1: Don't build Hatches");
+        provider.add("item.gtmm.advanced_terminal.setting.4", "Flip Multiblock?");
+        provider.add("item.gtmm.advanced_terminal.setting.4.tooltip", "0: No Flip\n1: Flip");
 
         // errors
         provider.add("gtmm.multiblock.pattern.error.machine_casing", "All Machine Casings must be the same");
