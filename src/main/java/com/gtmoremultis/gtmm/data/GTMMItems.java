@@ -1,11 +1,10 @@
 package com.gtmoremultis.gtmm.data;
 
 import com.gregtechceu.gtceu.api.item.ComponentItem;
-import com.gregtechceu.gtceu.common.item.TooltipBehavior;
+import com.gtmoremultis.gtmm.data.Behaviour.AdvancedTerminalBehaviour;
 import com.tterrag.registrate.util.entry.ItemEntry;
-import net.minecraft.world.item.Item;
-import net.minecraftforge.common.util.NonNullConsumer;
 
+import static com.gregtechceu.gtceu.common.data.GTItems.attach;
 import static com.gtmoremultis.gtmm.GTMMRegistries.REGISTRATE;
 
 public class GTMMItems {
@@ -13,10 +12,10 @@ public class GTMMItems {
         REGISTRATE.creativeModeTab(() -> GTMMCreativeModeTabs.MAIN_TAB);
     }
 
-    private static NonNullConsumer<? super ComponentItem> attach(TooltipBehavior components) {
-        return (item) -> item.attachComponents(components);
-    }
+    public static ItemEntry<ComponentItem> ADVANCED_TERMINAL = REGISTRATE
+            .item("advanced_terminal", ComponentItem::create)
+            .properties(p -> p.stacksTo(1))
+            .onRegister(attach(new AdvancedTerminalBehaviour())).register();
 
-    public static void init() {
-    }
+    public static void init() {}
 }

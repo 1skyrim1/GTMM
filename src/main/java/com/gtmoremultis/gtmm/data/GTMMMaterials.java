@@ -16,8 +16,6 @@ import com.gtmoremultis.gtmm.data.materials.SecondMaterials;
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.SHINY;
 
 public class GTMMMaterials {
-    public static Material Infinity;
-    public static Material BlackMatter;
 
     public static void init() {
         AdjustGTMaterials.init();
@@ -48,10 +46,10 @@ public class GTMMMaterials {
     }
 
     public static class MaterialIcons {
-        public static MaterialIconSet InfinityIcon;
+        //public static MaterialIconSet InfinityIcon;
 
-        public MaterialIcons() {
-            InfinityIcon = new MaterialIconSet("infinity", SHINY);
-        }
+        //public MaterialIcons() {
+        //    InfinityIcon = new MaterialIconSet("infinity", SHINY);
+        //}
     }
 }

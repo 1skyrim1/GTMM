@@ -34,46 +34,12 @@ import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.abilities;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.autoAbilities;
 import static com.gtmoremultis.gtmm.GTMMRegistries.REGISTRATE;
-import static com.gtmoremultis.gtmm.data.GTMMMachineUtils.*;
 
 @SuppressWarnings("unused")
 public class GTMMMachines {
-    public static final int[] ULV2UV = GTValues.tiersBetween(0, 8);
-    public static final int[] MV2ZPM = GTValues.tiersBetween(2, 7);
-    public static final int[] EV2UV = GTValues.tiersBetween(4, 8);
     static {
         REGISTRATE.creativeModeTab(() -> GTMMCreativeModeTabs.MAIN_TAB);
     }
-    // Part
-
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH = registerWirelessHatch(IO.IN, 1, APartAbility.INPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH = registerWirelessHatch(IO.OUT, 1, APartAbility.OUTPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_4 = registerWirelessHatch(IO.IN, 4, APartAbility.INPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_4 = registerWirelessHatch(IO.OUT, 4, APartAbility.OUTPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_16 = registerWirelessHatch(IO.IN, 16, APartAbility.INPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_16 = registerWirelessHatch(IO.OUT, 16, APartAbility.OUTPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_64 = registerWirelessHatch(IO.IN, 64, APartAbility.INPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_64 = registerWirelessHatch(IO.OUT, 64, APartAbility.OUTPUT_WIRELESS_ENERGY);
-
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_256 = registerHighTierWirelessHatch(IO.IN, 256, APartAbility.INPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_256 = registerHighTierWirelessHatch(IO.OUT, 256, APartAbility.OUTPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_1024 = registerHighTierWirelessHatch(IO.IN, 1024, APartAbility.INPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_1024 = registerHighTierWirelessHatch(IO.OUT, 1024, APartAbility.OUTPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_4096 = registerHighTierWirelessHatch(IO.IN, 4096, APartAbility.INPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_4096 = registerHighTierWirelessHatch(IO.OUT, 4096, APartAbility.OUTPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_16384 = registerHighTierWirelessHatch(IO.IN, 16384, APartAbility.INPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_16384 = registerHighTierWirelessHatch(IO.OUT, 16384, APartAbility.OUTPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_65536 = registerHighTierWirelessHatch(IO.IN, 65536, APartAbility.INPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_65536 = registerHighTierWirelessHatch(IO.OUT, 65536, APartAbility.OUTPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_262144 = registerHighTierWirelessHatch(IO.IN, 262144, APartAbility.INPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_262144 = registerHighTierWirelessHatch(IO.OUT, 262144, APartAbility.OUTPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_1048576 = registerHighTierWirelessHatch(IO.IN, 1048576, APartAbility.INPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_1048576 = registerHighTierWirelessHatch(IO.OUT, 1048576, APartAbility.OUTPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_4194304 = registerHighTierWirelessHatch(IO.IN, 4194304, APartAbility.INPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_4194304 = registerHighTierWirelessHatch(IO.OUT, 4194304, APartAbility.OUTPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_16777216 = registerHighTierWirelessHatch(IO.IN, 16777216, APartAbility.INPUT_WIRELESS_ENERGY);
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_16777216 = registerHighTierWirelessHatch(IO.OUT, 16777216, APartAbility.OUTPUT_WIRELESS_ENERGY);
-
     // Machine
 
     public static final MultiblockMachineDefinition CoAL = REGISTRATE.multiblock("component_assembly_line", GTMMMachine::new)

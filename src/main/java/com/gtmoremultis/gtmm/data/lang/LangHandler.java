@@ -6,22 +6,18 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
 
     public static void init(RegistrateLangProvider provider) {
-        // materials
-        replace(provider, GTMMMaterials.Infinity.getUnlocalizedName(), "Infinity");
-        replace(provider, GTMMMaterials.BlackMatter.getUnlocalizedName(), "Black Matter");
-
-        // blocks
-        // replace(provider, "block.gtmm.iridium_machine_casing", "Iridium Machine Casing");
-        // replace(provider, "block.gtmm.naquadah_machine_casing", "Naquadah Machine Casing");
-
-        // Wireless Energy Hatches
-        provider.add("gtmm.machine.wireless_hatch.energy.tooltip", "Does not connect to wires. This block withdraws EU from the network.");
-        provider.add("gtmm.machine.wireless_hatch.dynamo.tooltip", "Does not connect to wires. This block accepts EU into the network.");
-        provider.add("gtmm.machine.wireless_hatch.both.tooltip", "Stores energy globally in a network, up to 2^(2^31) EU.");
-
         // tooltips
         provider.add("gtmm.multiblock.coal.tier", "Casing Tier: %s");
         provider.add("gtmm.multiblock.coal.parallel_level", "Max Parallels: %s");
+
+        // Advanced Terminal
+        provider.add("item.gtmm.advanced_terminal.setting.title", "Advanced Terminal Setting");
+        provider.add("item.gtmm.advanced_terminal.setting.1", "Coil Tier");
+        provider.add("item.gtmm.advanced_terminal.setting.1.tooltip", "1.tooltip");     // Hier fehlt was!!
+        provider.add("item.gtmm.advanced_terminal.setting.2", "Repeat Count???");       // Hier auch
+        provider.add("item.gtmm.advanced_terminal.setting.2.tooltip", "2.tooltip");     // Hier auch
+        provider.add("item.gtmm.advanced_terminal.setting.3", "Build Hatches? (0: Yes|1: No");
+        provider.add("item.gtmm.advanced_terminal.setting.3.tooltip", "3.tooltip");     // Hier aber auch noch
 
         // errors
         provider.add("gtmm.multiblock.pattern.error.machine_casing", "All Machine Casings must be the same");

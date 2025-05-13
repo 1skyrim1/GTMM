@@ -1,17 +1,20 @@
 package com.gtmoremultis.gtmm.data.recipes;
 
-import com.gregtechceu.gtceu.api.item.PipeBlockItem;
+import com.gregtechceu.gtceu.api.data.chemical.material.stack.UnificationEntry;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
-import com.gregtechceu.gtceu.common.data.GTFluids;
 import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.data.GTMachines;
-import com.gregtechceu.gtceu.common.data.machines.GCYMMachines;
 import com.gregtechceu.gtceu.common.data.machines.GTMultiMachines;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
+import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper;
+import com.gtmoremultis.gtmm.GTMM;
 import com.gtmoremultis.gtmm.data.GTMMCasingBlocks;
 import com.gtmoremultis.gtmm.data.GTMMMachines;
 import com.gtmoremultis.gtmm.data.GTMMRecipeTypes;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraftforge.common.Tags;
 
 import java.util.function.Consumer;
 
@@ -20,12 +23,24 @@ import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
 import static com.gtmoremultis.gtmm.data.GTMMRecipes.dur;
+import static com.gtmoremultis.gtmm.data.GTMMItems.ADVANCED_TERMINAL;
 
 public class SelfRecipes {
     public static void init(Consumer<FinishedRecipe> provider) {
         machineRecipes(provider);
         blockRecipes(provider);
         materialRecipes(provider);
+        itemRecipes(provider);
+    }
+
+    private static void itemRecipes(Consumer<FinishedRecipe> provider) {
+        VanillaRecipeHelper.addShapedRecipe(provider, true, GTMM.id("advanced_terminal"), ADVANCED_TERMINAL.asStack(),
+                "SGS", "PBP", "PWP",
+                'S', new UnificationEntry(screw, Steel),
+                'G', Tags.Items.GLASS_PANES,
+                'B', new ItemStack(Items.BOOK),
+                'P', new UnificationEntry(plate, Steel),
+                'W', new UnificationEntry(wireGtSingle, Tin));
     }
 
     private static void materialRecipes(Consumer<FinishedRecipe> provider) {

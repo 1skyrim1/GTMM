@@ -62,9 +62,16 @@ repositories {
     }
     maven {
         // saps.dev Maven (KubeJS and Rhino)
-        url = "https://maven.saps.dev/minecraft"
+        url = "https://maven.latvian.dev/releases"
         content {
             includeGroup "dev.latvian.mods"
+            includeGroup "dev.latvian.apps"
+        }
+    }
+    maven {
+        url "https://maven.ftb.dev/releases"
+        content {
+            includeGroup "dev.ftb.mods"
         }
     }
     maven { // Registrate
@@ -132,6 +139,10 @@ dependencies {
     modImplementation("dev.ftb.mods:ftb-teams:$project.ftb_teams_version") { transitive = false }
     // Configuration
     modImplementation("dev.toma.configuration:configuration-forge-$project.minecraft_version:$project.configuration_version")
+    // AE
+    modImplementation("appeng:appliedenergistics2-forge-$project.ae2_version"){ transitive = false }
+    // Jade
+    modImplementation 'maven.modrinth:Jade-1.20.1-forge-11.9.2'
 
     //modRuntimeOnly("dev.toma.configuration:configuration-forge-$project.minecraft_version:$project.configuration_version")
     modRuntimeOnly("mezz.jei:jei-$project.minecraft_version-forge:$project.jei_version") { transitive = false }

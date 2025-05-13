@@ -6,7 +6,6 @@ import com.gregtechceu.gtceu.api.addon.events.KJSRecipeKeyEvent;
 import com.gregtechceu.gtceu.api.addon.events.MaterialCasingCollectionEvent;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import com.gtmoremultis.gtmm.data.GTMMCasingBlocks;
-import com.gtmoremultis.gtmm.data.GTMMElement;
 import com.gtmoremultis.gtmm.data.GTMMRecipes;
 import net.minecraft.data.recipes.FinishedRecipe;
 
@@ -31,7 +30,7 @@ public class GTMMAddon implements IGTAddon {
 
     @Override
     public void registerElements() {
-        GTMMElement.init();
+        //GTMMElement.init();
     }
 
     @Override
