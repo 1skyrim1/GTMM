@@ -1,4 +1,4 @@
-package com.gtmoremultis.gtmm.block;
+package com.gtmoremultis.gtmm.common.block;
 
 import com.gtmoremultis.gtmm.api.block.ITier;
 

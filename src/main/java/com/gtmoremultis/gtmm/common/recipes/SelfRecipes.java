@@ -1,4 +1,4 @@
-package com.gtmoremultis.gtmm.data.recipes;
+package com.gtmoremultis.gtmm.common.recipes;
 
 import com.gregtechceu.gtceu.api.data.chemical.material.stack.UnificationEntry;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
@@ -8,9 +8,9 @@ import com.gregtechceu.gtceu.common.data.machines.GTMultiMachines;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper;
 import com.gtmoremultis.gtmm.GTMM;
-import com.gtmoremultis.gtmm.data.GTMMCasingBlocks;
-import com.gtmoremultis.gtmm.data.GTMMMachines;
-import com.gtmoremultis.gtmm.data.GTMMRecipeTypes;
+import com.gtmoremultis.gtmm.common.data.GTMMCasingBlocks;
+import com.gtmoremultis.gtmm.common.data.GTMMMachines;
+import com.gtmoremultis.gtmm.common.data.GTMMRecipeTypes;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -22,8 +22,8 @@ import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
-import static com.gtmoremultis.gtmm.data.GTMMRecipes.dur;
-import static com.gtmoremultis.gtmm.data.GTMMItems.ADVANCED_TERMINAL;
+import static com.gtmoremultis.gtmm.common.data.GTMMRecipes.dur;
+import static com.gtmoremultis.gtmm.common.data.GTMMItems.ADVANCED_TERMINAL;
 
 public class SelfRecipes {
     public static void init(Consumer<FinishedRecipe> provider) {

@@ -9,7 +9,7 @@ import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
 import com.gregtechceu.gtceu.api.pattern.predicates.SimplePredicate;
 import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
 
-import com.gtmoremultis.gtmm.data.Behaviour.AdvancedTerminalBehaviour;
+import com.gtmoremultis.gtmm.common.behaviour.AdvancedTerminalBehaviour;
 import com.lowdragmc.lowdraglib.utils.BlockInfo;
 
 import net.minecraft.core.BlockPos;

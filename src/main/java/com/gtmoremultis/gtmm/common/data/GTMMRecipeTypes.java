@@ -1,4 +1,4 @@
-package com.gtmoremultis.gtmm.data;
+package com.gtmoremultis.gtmm.common.data;
 
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;

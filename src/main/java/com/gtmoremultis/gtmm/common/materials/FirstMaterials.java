@@ -1,4 +1,4 @@
-package com.gtmoremultis.gtmm.data.materials;
+package com.gtmoremultis.gtmm.common.materials;
 
 
 public class FirstMaterials {

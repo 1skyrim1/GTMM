@@ -1,9 +1,8 @@
-package com.gtmoremultis.gtmm.data;
+package com.gtmoremultis.gtmm.common.data;
 
 import com.gregtechceu.gtceu.api.item.tool.GTToolType;
 import com.gtmoremultis.gtmm.GTMM;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;

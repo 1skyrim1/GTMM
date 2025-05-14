@@ -1,6 +1,6 @@
-package com.gtmoremultis.gtmm.data;
+package com.gtmoremultis.gtmm.common.data;
 
-import com.gtmoremultis.gtmm.data.recipes.DefaultRecipes;
+import com.gtmoremultis.gtmm.common.recipes.DefaultRecipes;
 import net.minecraft.data.recipes.FinishedRecipe;
 
 import java.util.function.Consumer;

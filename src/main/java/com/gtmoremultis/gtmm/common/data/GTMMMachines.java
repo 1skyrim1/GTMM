@@ -1,6 +1,7 @@
-package com.gtmoremultis.gtmm.data;
+package com.gtmoremultis.gtmm.common.data;
 
 import com.gregtechceu.gtceu.GTCEu;
+import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
@@ -10,20 +11,24 @@ import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
-import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
+import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.client.renderer.machine.WorkableCasingMachineRenderer;
+import com.gregtechceu.gtceu.client.util.TooltipHelper;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMachines;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
+import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
+import com.gregtechceu.gtceu.common.data.machines.GTMultiMachines;
 import com.gregtechceu.gtceu.common.data.machines.GTResearchMachines;
-import com.gregtechceu.gtceu.common.machine.multiblock.part.AutoMaintenanceHatchPartMachine;
+import com.gregtechceu.gtceu.common.machine.multiblock.electric.PowerSubstationMachine;
 import com.gtmoremultis.gtmm.GTMM;
 import com.gtmoremultis.gtmm.api.machine.multiblock.APartAbility;
 import com.gtmoremultis.gtmm.api.machine.multiblock.CreativeEnergyHatchPartMachine;
 import com.gtmoremultis.gtmm.api.machine.multiblock.GTMMMachine;
 import com.gtmoremultis.gtmm.api.pattern.APredicates;
-import com.gtmoremultis.gtmm.block.BlockTier;
-import com.gtmoremultis.gtmm.block.MachineCasingBlock;
+import com.gtmoremultis.gtmm.common.block.BlockTier;
+import com.gtmoremultis.gtmm.common.block.MachineCasingBlock;
+import com.gtmoremultis.gtmm.common.machine.multiblock.WirelessSubstationMachine;
 import com.gtmoremultis.gtmm.config.ConfigHandler;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -53,6 +58,48 @@ public class GTMMMachines {
             .abilities(PartAbility.INPUT_ENERGY)
             .tier(MAX)
             .register();
+
+    // Wireless Power Substation
+    public static final MultiblockMachineDefinition WIRELESS_POWER_SUBSTATION = REGISTRATE.multiblock("wireless_power_substation", WirelessSubstationMachine::new)
+            .langValue("Advanced Power Substation")
+            .rotationState(RotationState.ALL)
+            .recipeType(GTRecipeTypes.DUMMY_RECIPES)
+            .tooltips(Component.translatable("gtceu.machine.power_substation.tooltip.0"),
+                    Component.translatable("gtceu.machine.power_substation.tooltip.1"),
+                    Component.translatable("gtceu.machine.power_substation.tooltip.2",
+                            PowerSubstationMachine.MAX_BATTERY_LAYERS),
+                    Component.translatable("gtceu.machine.power_substation.tooltip.3"),
+                    Component.translatable("gtceu.machine.power_substation.tooltip.4",
+                            PowerSubstationMachine.PASSIVE_DRAIN_MAX_PER_STORAGE / 1000))
+            .tooltipBuilder(
+                    (stack,
+                     components) -> components.add(Component.translatable("gtceu.machine.power_substation.tooltip.5")
+                            .append(Component.translatable("gtceu.machine.power_substation.tooltip.6")
+                                    .withStyle(TooltipHelper.RAINBOW_HSL_SLOW))))
+            .appearanceBlock(GTBlocks.CASING_PALLADIUM_SUBSTATION)
+            .pattern(definition -> FactoryBlockPattern.start(RIGHT, BACK, UP)
+                    .aisle("XXSXX", "XXXXX", "XXXXX", "XXXXX", "XXXXX")
+                    .aisle("XXXXX", "XCCCX", "XCCCX", "XCCCX", "XXXXX")
+                    .aisle("GGGGG", "GBBBG", "GBBBG", "GBBBG", "GGGGG")
+                    .setRepeatable(1, PowerSubstationMachine.MAX_BATTERY_LAYERS)
+                    .aisle("GGGGG", "GGGGG", "GGGGG", "GGGGG", "GGGGG")
+                    .where('S', Predicates.controller(Predicates.blocks(definition.getBlock())))
+                    .where('C', Predicates.blocks(GTBlocks.CASING_PALLADIUM_SUBSTATION.get()))
+                    .where('X',
+                            Predicates.blocks(GTBlocks.CASING_PALLADIUM_SUBSTATION.get())
+                                    .setMinGlobalLimited(PowerSubstationMachine.MIN_CASINGS)
+                                    .or(autoAbilities(true, false, false))
+                                    .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.SUBSTATION_INPUT_ENERGY,
+                                            PartAbility.INPUT_LASER).setMinGlobalLimited(1))
+                                    .or(abilities(PartAbility.OUTPUT_ENERGY, PartAbility.SUBSTATION_OUTPUT_ENERGY,
+                                            PartAbility.OUTPUT_LASER).setMinGlobalLimited(1)))
+                    .where('G', Predicates.blocks(GTBlocks.CASING_LAMINATED_GLASS.get()))
+                    .where('B', Predicates.powerSubstationBatteries())
+                    .build())
+            .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_palladium_substation"),
+                    GTCEu.id("block/multiblock/power_substation"))
+            .register();
+
 
     // CoAL
     public static final MultiblockMachineDefinition CoAL = REGISTRATE.multiblock("component_assembly_line", GTMMMachine::new)
@@ -187,12 +234,12 @@ public class GTMMMachines {
     }
 
     private static void modifyGT() {
-        MultiblockMachineDefinition definition = (MultiblockMachineDefinition) GTResearchMachines.HIGH_PERFORMANCE_COMPUTING_ARRAY;
-        definition.setPatternFactory(() -> FactoryBlockPattern.start()
+        MultiblockMachineDefinition hpca_definition = (MultiblockMachineDefinition) GTResearchMachines.HIGH_PERFORMANCE_COMPUTING_ARRAY;
+        hpca_definition.setPatternFactory(() -> FactoryBlockPattern.start()
                 .aisle("AA", "CC", "CC", "CC", "AA")
                 .aisle("VA", "XV", "XV", "XV", "VA").setRepeatable(3, Math.max(3, Math.min(15, ConfigHandler.INSTANCE.machine.hpca_length)))
                 .aisle("SA", "CC", "CC", "CC", "AA")
-                .where('S', Predicates.controller(Predicates.blocks(definition.getBlock())))
+                .where('S', Predicates.controller(Predicates.blocks(hpca_definition.getBlock())))
                 .where('A', Predicates.blocks(GTBlocks.ADVANCED_COMPUTER_CASING.get()))
                 .where('V', Predicates.blocks(GTBlocks.COMPUTER_HEAT_VENT.get()))
                 .where('X', abilities(PartAbility.HPCA_COMPONENT))

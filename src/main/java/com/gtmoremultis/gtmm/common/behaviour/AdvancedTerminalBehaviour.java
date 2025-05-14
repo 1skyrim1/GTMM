@@ -1,4 +1,4 @@
-package com.gtmoremultis.gtmm.data.Behaviour;
+package com.gtmoremultis.gtmm.common.behaviour;
 
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.block.MetaMachineBlock;

@@ -1,4 +1,4 @@
-package com.gtmoremultis.gtmm.data;
+package com.gtmoremultis.gtmm.common.data;
 
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;

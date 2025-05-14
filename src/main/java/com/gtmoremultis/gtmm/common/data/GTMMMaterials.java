@@ -1,19 +1,16 @@
-package com.gtmoremultis.gtmm.data;
+package com.gtmoremultis.gtmm.common.data;
 
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
-import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.DustProperty;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.FluidProperty;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.OreProperty;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
-import com.gtmoremultis.gtmm.data.materials.AdjustGTMaterials;
-import com.gtmoremultis.gtmm.data.materials.FirstMaterials;
-import com.gtmoremultis.gtmm.data.materials.SecondMaterials;
-
-import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.SHINY;
+import com.gtmoremultis.gtmm.common.materials.AdjustGTMaterials;
+import com.gtmoremultis.gtmm.common.materials.FirstMaterials;
+import com.gtmoremultis.gtmm.common.materials.SecondMaterials;
 
 public class GTMMMaterials {
 

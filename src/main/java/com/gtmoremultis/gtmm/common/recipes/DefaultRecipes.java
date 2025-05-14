@@ -1,11 +1,9 @@
-package com.gtmoremultis.gtmm.data.recipes;
+package com.gtmoremultis.gtmm.common.recipes;
 
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class DefaultRecipes {
     public static void init(Consumer<FinishedRecipe> provider) {

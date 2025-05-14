@@ -1,6 +1,6 @@
-package com.gtmoremultis.gtmm.data;
+package com.gtmoremultis.gtmm.common.data;
 
-import com.gtmoremultis.gtmm.data.lang.LangHandler;
+import com.gtmoremultis.gtmm.common.lang.LangHandler;
 import com.tterrag.registrate.providers.ProviderType;
 
 import static com.gtmoremultis.gtmm.GTMMRegistries.REGISTRATE;

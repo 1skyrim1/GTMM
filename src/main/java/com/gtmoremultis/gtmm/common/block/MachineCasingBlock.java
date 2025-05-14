@@ -1,4 +1,4 @@
-package com.gtmoremultis.gtmm.block;
+package com.gtmoremultis.gtmm.common.block;
 
 import com.gtmoremultis.gtmm.api.block.ITier;
 import com.gtmoremultis.gtmm.api.block.MachineCasingType;
@@ -7,7 +7,7 @@ import lombok.Getter;
 import net.minecraft.world.level.block.Block;
 
 import static com.gregtechceu.gtceu.common.data.GTBlocks.*;
-import static com.gtmoremultis.gtmm.block.BlockTier.*;
+import static com.gtmoremultis.gtmm.common.block.BlockTier.*;
 
 public class MachineCasingBlock extends Block {
     public MachineCasingBlock(Properties properties) {

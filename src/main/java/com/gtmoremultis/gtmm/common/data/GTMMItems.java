@@ -1,7 +1,7 @@
-package com.gtmoremultis.gtmm.data;
+package com.gtmoremultis.gtmm.common.data;
 
 import com.gregtechceu.gtceu.api.item.ComponentItem;
-import com.gtmoremultis.gtmm.data.Behaviour.AdvancedTerminalBehaviour;
+import com.gtmoremultis.gtmm.common.behaviour.AdvancedTerminalBehaviour;
 import com.tterrag.registrate.util.entry.ItemEntry;
 
 import static com.gregtechceu.gtceu.common.data.GTItems.attach;

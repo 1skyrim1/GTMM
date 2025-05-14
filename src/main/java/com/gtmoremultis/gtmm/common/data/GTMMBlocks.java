@@ -1,4 +1,4 @@
-package com.gtmoremultis.gtmm.data;
+package com.gtmoremultis.gtmm.common.data;
 
 import static com.gtmoremultis.gtmm.GTMMRegistries.REGISTRATE;
 

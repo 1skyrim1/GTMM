@@ -9,8 +9,8 @@ import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.config.ConfigHolder;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
+import com.gtmoremultis.gtmm.common.data.*;
 import com.gtmoremultis.gtmm.config.ConfigHandler;
-import com.gtmoremultis.gtmm.data.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -58,6 +58,7 @@ public class GTMM {
     }
 
     public void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event){
+        WirelessMachines.init();
         GTMMMachines.init();
     }
 

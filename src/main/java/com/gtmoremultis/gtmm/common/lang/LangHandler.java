@@ -1,6 +1,5 @@
-package com.gtmoremultis.gtmm.data.lang;
+package com.gtmoremultis.gtmm.common.lang;
 
-import com.gtmoremultis.gtmm.data.GTMMMaterials;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 
 public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
@@ -9,6 +8,8 @@ public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
         // tooltips
         provider.add("gtmm.multiblock.coal.tier", "Casing Tier: %s");
         provider.add("gtmm.multiblock.coal.parallel_level", "Max Parallels: %s");
+        provider.add("gtmm.gui.wpss.wireless_configurator.frequency_set", "Current Frequency: %s");
+        provider.add("gtmm.gui.wpss.wireless_configurator.title", "Set Frequency");
 
         // Advanced Terminal
         provider.add("item.gtmm.advanced_terminal.setting.title", "Advanced Terminal Setting");
