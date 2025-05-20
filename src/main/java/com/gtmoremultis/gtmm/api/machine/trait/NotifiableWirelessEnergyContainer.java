@@ -36,7 +36,6 @@ public class NotifiableWirelessEnergyContainer extends NotifiableEnergyContainer
     @Override
     public void updateTick() {
         super.updateTick();
-        if (frequency == 0) return;
     }
 
     @Override

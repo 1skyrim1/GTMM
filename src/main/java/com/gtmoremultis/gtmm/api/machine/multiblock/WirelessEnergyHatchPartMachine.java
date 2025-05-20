@@ -5,13 +5,10 @@ import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.gui.fancy.ConfiguratorPanel;
 import com.gregtechceu.gtceu.api.gui.fancy.IFancyConfigurator;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
-import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
 import com.gregtechceu.gtceu.api.machine.multiblock.part.TieredIOPartMachine;
 import com.gregtechceu.gtceu.common.data.GTItems;
-import com.gregtechceu.gtceu.utils.FormattingUtil;
 import com.gtmoremultis.gtmm.api.machine.trait.NotifiableWirelessEnergyContainer;
-import com.gtmoremultis.gtmm.common.machine.multiblock.WirelessSubstationMachine;
 import com.gtmoremultis.gtmm.saveddata.WirelessSubstationSavedData;
 import com.lowdragmc.lowdraglib.gui.texture.IGuiTexture;
 import com.lowdragmc.lowdraglib.gui.texture.ItemStackTexture;
@@ -28,7 +25,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.BlockHitResult;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +43,7 @@ public class WirelessEnergyHatchPartMachine extends TieredIOPartMachine {
         super(holder, tier, io);
         this.amperage = amperage;
         this.energyContainer = createEnergyContainer(args);
-        this.part.add((IMultiPart) this);
+        this.part.add(this);
         addWirelessEnergy();
     }
 

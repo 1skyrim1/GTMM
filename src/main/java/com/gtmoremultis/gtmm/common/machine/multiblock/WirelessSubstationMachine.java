@@ -1,11 +1,9 @@
 package com.gtmoremultis.gtmm.common.machine.multiblock;
 
-import com.gregtechceu.gtceu.api.capability.IControllable;
 import com.gregtechceu.gtceu.api.gui.fancy.ConfiguratorPanel;
 import com.gregtechceu.gtceu.api.gui.fancy.IFancyConfigurator;
 import com.gregtechceu.gtceu.api.machine.ConditionalSubscriptionHandler;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
-import com.gregtechceu.gtceu.api.machine.trait.RecipeLogic;
 import com.gregtechceu.gtceu.api.misc.EnergyContainerList;
 import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.machine.multiblock.electric.PowerSubstationMachine;
@@ -23,7 +21,7 @@ import net.minecraft.server.level.ServerLevel;
 
 import java.util.List;
 
-public class WirelessSubstationMachine extends PowerSubstationMachine implements IControllable {
+public class WirelessSubstationMachine extends PowerSubstationMachine {
 
     private final PowerStationEnergyBank energyBank;
 
@@ -36,24 +34,14 @@ public class WirelessSubstationMachine extends PowerSubstationMachine implements
 
     public WirelessSubstationMachine(IMachineBlockEntity holder) {
         super(holder);
-        this.tickSubscription = new ConditionalSubscriptionHandler(this, this::transferEnergyTick, this::isFormed);
+        //this.tickSubscription = new ConditionalSubscriptionHandler(this, this::transferEnergyTick, this::isFormed);
         this.energyBank = new PowerStationEnergyBank(this, List.of());
         this.converterSubscription = new ConditionalSubscriptionHandler(this, this::convertEnergyTick, this::isFormed);
         this.frequency = 0;
     }
 
     public void convertEnergyTick() {
-        /*
-        if (frequency == 0) {
-            getRecipeLogic().setStatus(RecipeLogic.Status.SUSPEND);
-            return;
-        }
         if (isWorkingEnabled()) {
-            getRecipeLogic().setStatus(isFormed() ? RecipeLogic.Status.WORKING : RecipeLogic.Status.SUSPEND);
-        }
-        */
-        if (isWorkingEnabled()) {
-            // Distribute energy to all possible locations
             if (getLevel() instanceof ServerLevel serverLevel) {
                 WirelessSubstationSavedData savedData = WirelessSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
 
