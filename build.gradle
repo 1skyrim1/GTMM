@@ -1,17 +1,10 @@
 plugins {
-    id "dev.architectury.loom" version "1.6-SNAPSHOT"
+    id "idea"
     id "maven-publish"
-}
-
-base {
-    archivesName = project.archives_base_name
-}
-
-version = project.mod_version
-group = project.maven_group
-
-java {
-    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.spongepowered.mixin' version '0.7.+'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'com.diffplug.spotless' version '7.0.2'
 }
 
 def generatedResources = file("src/generated")
@@ -22,24 +15,14 @@ sourceSets {
     }
 }
 
-loom {
-    silentMojangMappingsLicense()
-    forge {
-	dataGen{
-            mod(mod_id)
-        }
-    }
-	runConfigs.named("data").configure {
-        programArg("--existing=" + file("src/main/resources").absolutePath)
-        programArgs("--client", "--server")
-    }
+mixin {
+    // MixinGradle Settings
+    add sourceSets.main, 'mixins.gtmm.refmap.json'
+    config 'gtmm.mixins.json'
 }
 
 repositories {
     mavenLocal()
-    flatDir {
-        dir 'libs'
-    }
     mavenCentral()
     maven {
         name = 'GTCEu Maven'
@@ -49,38 +32,22 @@ repositories {
         }
     }
     maven {
-        name 'FirstDarkDev'
-        url "https://maven.firstdarkdev.xyz/snapshots/"
-    }    
-    maven {
-        name 'Quilt'
-        url 'https://maven.quiltmc.org/repository/release/'
+        name = "sponge"
+        url = "https://repo.spongepowered.org/maven"
     }
     maven {
-        name = 'ParchmentMC'
-        url = 'https://maven.parchmentmc.org'
+        name 'FirstDarkDev'
+        url "https://maven.firstdarkdev.xyz/snapshots/"
     }
     maven {
         // saps.dev Maven (KubeJS and Rhino)
         url = "https://maven.latvian.dev/releases"
-        content {
-            includeGroup "dev.latvian.mods"
-            includeGroup "dev.latvian.apps"
-        }
-    }
-    maven {
-        url "https://maven.ftb.dev/releases"
-        content {
-            includeGroup "dev.ftb.mods"
-        }
     }
     maven { // Registrate
         url = "https://maven.tterrag.com/"
         content {
             // need to be specific here due to version overlaps
-            includeGroup("com.jozufozu.flywheel")
             includeGroup("com.tterrag.registrate")
-            includeGroup("com.simibubi.create")
         }
     }
     maven {
@@ -100,66 +67,94 @@ repositories {
     }
     maven {
         // EMI
-		name = "TerraformersMC"
-		url = "https://maven.terraformersmc.com/"
-	}
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
+
     maven {
-        // Configuration
-        name = "Configuration"
-        url 'https://api.repsy.io/mvn/toma/public'
+        url = "https://maven.architectury.dev"
     }
     maven {
-        url "https://maven.saps.dev/releases"
+        url = "https://thedarkcolour.github.io/KotlinForForge/"
+    }
+    maven {
+        name "Modmaven"
+        url "https://modmaven.dev/"
+        // For Gradle 5.1 and above, limit it to just AE2
         content {
-            includeGroup "dev.latvian.mods"
-            includeGroup "dev.ftb.mods"
+            includeGroup 'appeng'
         }
     }
 }
 
-dependencies {
-    minecraft "com.mojang:minecraft:$project.minecraft_version"
-    forge "net.minecraftforge:forge:$project.minecraft_version-$project.forge_version"
-    // layered mappings - Mojmap names, parchment and QM docs and parameters
-    mappings loom.layered {
-        it.mappings("org.quiltmc:quilt-mappings:$project.minecraft_version+build.$project.quilt_mappings:intermediary-v2")
-        it.parchment("org.parchmentmc.data:parchment-$project.minecraft_version:$project.parchment_mappings@zip")
-        it.officialMojangMappings { nameSyntheticMembers = false }
+
+version = mod_version
+group = maven_group
+base { archivesName = archives_base_name }
+java { sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17 }
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+minecraft {
+    mappings channel: mapping_channel, version: mapping_version
+    copyIdeResources = true
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods { "${mod_id}" { source sourceSets.main } }
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+        }
+        client { property 'forge.enabledGameTestNamespaces', mod_id }
+        server { property 'forge.enabledGameTestNamespaces', mod_id; args '--nogui' }
+        data {
+            // example of overriding the workingDirectory set in configureEach above
+            workingDirectory project.file('run-data')
+
+            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+        }
     }
+}
+spotless {
+    java {
+        toggleOffOn()
+    }
+}
+apply from: "$rootDir/gradle/scripts/spotless.gradle"
 
-    modCompileOnly("mezz.jei:jei-$project.minecraft_version-forge-api:$project.jei_version") { transitive = false }
-    modCompileOnly("mezz.jei:jei-$project.minecraft_version-common-api:$project.jei_version") { transitive = false }
 
-    modImplementation("com.gregtechceu.gtceu:gtceu-$project.minecraft_version:$project.gtceu_version") { transitive = false }
-    modImplementation("com.lowdragmc.ldlib:ldlib-forge-$project.minecraft_version:$project.ldlib_version") { transitive = false }
-    modImplementation("com.tterrag.registrate:Registrate:$project.registrate_version")
-    modImplementation("dev.latvian.mods:kubejs-forge:$project.kubejs_version")
-    // FTB Mods
-    modImplementation("dev.ftb.mods:ftb-library:$project.ftb_library_version") { transitive = false }
-    modImplementation("dev.ftb.mods:ftb-teams:$project.ftb_teams_version") { transitive = false }
-    // Configuration
-    modImplementation("dev.toma.configuration:configuration-forge-$project.minecraft_version:$project.configuration_version")
-    // AE
-    modImplementation("appeng:appliedenergistics2-forge-$project.ae2_version"){ transitive = false }
-    // Jade
-    modImplementation 'maven.modrinth:Jade-1.20.1-forge-11.9.2'
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    //modRuntimeOnly("dev.toma.configuration:configuration-forge-$project.minecraft_version:$project.configuration_version")
-    modRuntimeOnly("mezz.jei:jei-$project.minecraft_version-forge:$project.jei_version") { transitive = false }
-    
-    modRuntimeOnly ("dev.emi:emi-forge:$project.emi_version+$project.minecraft_version")
+    // Apply Mixin AP
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    // Mixin Extras
-    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:$project.mixinextras_version"))
-    implementation(include("io.github.llamalad7:mixinextras-forge:$project.mixinextras_version"))
+    // JEI, EMI, Jade
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    runtimeOnly fg.deobf("dev.emi:emi-forge:${emi_version}+${minecraft_version}")
+    runtimeOnly fg.deobf("curse.maven:jade-324717:5390389")
+    compileOnly fg.deobf("curse.maven:jade-324717:5390389")
+
+    // GregTech and dependencies
+    implementation fg.deobf("com.gregtechceu.gtceu:gtceu-${minecraft_version}:${gtceu_version}:slim") { transitive = false }
+    implementation fg.deobf("com.lowdragmc.ldlib:ldlib-forge-${minecraft_version}:${ldlib_version}") { transitive = false }
+    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+    implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
+    implementation fg.deobf("dev.latvian.mods:rhino-forge:${rhino_version}")
+    implementation fg.deobf("dev.toma.configuration:configuration-forge-${minecraft_version}:${configuration_version}")
+    implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
+    implementation fg.deobf("appeng:appliedenergistics2-forge:${appeng_version}")
 
     // lombok
-    compileOnly 'org.projectlombok:lombok:1.18.24'
-    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
 }
 
-processResources {
-    // set up properties for filling into metadata
+tasks.named('processResources', ProcessResources).configure {
     var properties = [
             "mod_license": mod_license,
             "mod_id": mod_id,
@@ -174,10 +169,11 @@ processResources {
     inputs.properties(properties)
 
     filesMatching("META-INF/mods.toml") {
-        expand properties
+        expand properties + [project: project]
     }
 }
 
+tasks.named('jar', Jar).configure { finalizedBy 'reobfJar' }
 tasks.withType(JavaCompile).configureEach {
     // ensure that the encoding is set to UTF-8, no matter what the system default is
     // this fixes some edge cases with special characters not displaying correctly
@@ -185,43 +181,4 @@ tasks.withType(JavaCompile).configureEach {
     // If Javadoc is generated, this must be specified in that task too.
     options.encoding = "UTF-8"
     options.release.set(17)
-}
-
-java {
-    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-    // if it is present.
-    // If you remove this line, sources will not be generated.
-    withSourcesJar()
-}
-
-jar {
-    // add some additional metadata to the jar manifest
-    manifest {
-        attributes([
-                "Specification-Title"     : mod_id,
-                "Specification-Vendor"    : mod_author,
-                "Specification-Version"   : "1",
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : version,
-                "Implementation-Vendor"   : mod_author,
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
-}
-
-// configure the maven publication
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {
-        // Add repositories to publish to here.
-        // Notice: This block does NOT have the same function as the block in the top level.
-        // The repositories here will be used for publishing your artifact, not for
-        // retrieving dependencies.
-    }
 }

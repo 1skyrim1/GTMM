@@ -1,7 +1,6 @@
 package com.gtmoremultis.gtmm.common.data;
 
 import com.gregtechceu.gtceu.GTCEu;
-import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
@@ -11,14 +10,12 @@ import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
-import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.client.renderer.machine.WorkableCasingMachineRenderer;
 import com.gregtechceu.gtceu.client.util.TooltipHelper;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMachines;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
-import com.gregtechceu.gtceu.common.data.machines.GTMultiMachines;
 import com.gregtechceu.gtceu.common.data.machines.GTResearchMachines;
 import com.gregtechceu.gtceu.common.machine.multiblock.electric.PowerSubstationMachine;
 import com.gtmoremultis.gtmm.GTMM;
@@ -249,5 +246,13 @@ public class GTMMMachines {
                         .or(abilities(PartAbility.COMPUTATION_DATA_TRANSMISSION).setExactLimit(1))
                         .or(autoAbilities(true, false, false)))
                 .build());
+    MachineDefinition autoMaintenanceHatch = GTMachines.AUTO_MAINTENANCE_HATCH;
+    autoMaintenanceHatch.setTooltipBuilder((controller, components) -> {
+        components.add(Component.translatable("gtceu.universal.enabled"));
+    });
+    MachineDefinition cleaningMaintenanceHatch = GTMachines.CLEANING_MAINTENANCE_HATCH;
+        cleaningMaintenanceHatch.setTooltipBuilder((controller, components) -> {
+        components.add(Component.translatable("gtceu.universal.enabled"));
+    });
     }
 }
