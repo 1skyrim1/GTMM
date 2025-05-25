@@ -163,11 +163,9 @@ public class WPowerSubstationMachine extends WorkableMultiblockMachine
         // add wireless energy hatches on same frequency to machine
         if (getLevel() instanceof ServerLevel serverLevel) {
             WPowerSubstationSavedData savedData = WPowerSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
-            EnergyContainerList winputs = savedData.getWirelessEnergyInputs(getFrequency());
-            EnergyContainerList woutputs = savedData.getWirelessEnergyOutputs(getFrequency());
-            wirelessInputHatches = winputs;
-            wirelessOutputHatches = woutputs;
-            System.out.println("wgtmm: loaded wireless energy hatches to wpss\n" + winputs + "\n" + woutputs);
+            wirelessInputHatches = savedData.getWirelessEnergyInputs(getFrequency());
+            wirelessOutputHatches = savedData.getWirelessEnergyOutputs(getFrequency());
+            System.out.println("wgtmm: loaded wireless energy hatches to wpss on frequency" + frequency);
         }
     }
 
@@ -198,6 +196,14 @@ public class WPowerSubstationMachine extends WorkableMultiblockMachine
                 averageOutLastSec = netOutLastSec / 20;
                 netInLastSec = 0;
                 netOutLastSec = 0;
+            }
+
+            if (getLevel() instanceof ServerLevel serverLevel && getOffsetTimer() % 100 == 0) {
+                // update wireless hatches every 5 seconds
+                WPowerSubstationSavedData savedData = WPowerSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
+                wirelessInputHatches = savedData.getWirelessEnergyInputs(getFrequency());
+                wirelessOutputHatches = savedData.getWirelessEnergyOutputs(getFrequency());
+                System.out.println("wgtmm: updated wireless energy hatches to wpss on frequency" + frequency);
             }
 
             if (isWorkingEnabled() && isFormed()) {
@@ -404,11 +410,9 @@ public class WPowerSubstationMachine extends WorkableMultiblockMachine
 
         if (getLevel() instanceof ServerLevel serverLevel) {
             WPowerSubstationSavedData savedData = WPowerSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
-            EnergyContainerList winputs = savedData.getWirelessEnergyInputs(getFrequency());
-            EnergyContainerList woutputs = savedData.getWirelessEnergyOutputs(getFrequency());
-            wirelessInputHatches = winputs;
-            wirelessOutputHatches = woutputs;
-            System.out.println("wgtmm: reloaded wireless energy hatches to wpss\n" + winputs + "\n" + woutputs);
+            wirelessInputHatches = savedData.getWirelessEnergyInputs(getFrequency());
+            wirelessOutputHatches = savedData.getWirelessEnergyOutputs(getFrequency());
+            System.out.println("wgtmm: reloaded wireless energy hatches to wpss on new frequency" + frequency);
         }
     }
 
