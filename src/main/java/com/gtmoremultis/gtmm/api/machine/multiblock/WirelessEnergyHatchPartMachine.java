@@ -59,11 +59,13 @@ public class WirelessEnergyHatchPartMachine extends TieredIOPartMachine {
 
     @Override
     public void onLoad() {
+        addWirelessEnergy();
         super.onLoad();
     }
 
     @Override
     public void onUnload() {
+        removeWirelessEnergy();
         super.onUnload();
     }
 
@@ -75,6 +77,7 @@ public class WirelessEnergyHatchPartMachine extends TieredIOPartMachine {
     private void removeWirelessEnergy() {
         if (getLevel() instanceof ServerLevel serverLevel) {
             WPowerSubstationSavedData savedData = WPowerSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
+            System.out.println("wgtmm: removed wireless energy container from frequency " + energyContainer.getFrequency() + "\n" + this.getPos());
             savedData.removeEnergyInputs(energyContainer.getFrequency(), this);
             savedData.removeEnergyOutputs(energyContainer.getFrequency(), this);
             savedData.saveDataToCache();
@@ -85,8 +88,10 @@ public class WirelessEnergyHatchPartMachine extends TieredIOPartMachine {
         if (getLevel() instanceof ServerLevel serverLevel) {
             WPowerSubstationSavedData savedData = WPowerSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
             if (this.io == IO.IN) {
+                System.out.println("wgtmm: added wireless energy input container to frequency " + energyContainer.getFrequency() + "\n" + this.getPos());
                 savedData.addEnergyOutputs(energyContainer.getFrequency(), this);
             } else {
+                System.out.println("wgtmm: added wireless energy dynamo container to frequency " + energyContainer.getFrequency() + "\n" + this.getPos());
                 savedData.addEnergyInputs(energyContainer.getFrequency(), this);
             }
             savedData.saveDataToCache();

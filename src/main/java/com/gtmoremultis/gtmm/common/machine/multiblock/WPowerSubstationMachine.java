@@ -19,6 +19,7 @@ import com.gregtechceu.gtceu.api.machine.trait.MachineTrait;
 import com.gregtechceu.gtceu.api.machine.trait.RecipeLogic;
 import com.gregtechceu.gtceu.api.misc.EnergyContainerList;
 import com.gregtechceu.gtceu.common.data.GTItems;
+import com.gregtechceu.gtceu.common.machine.multiblock.electric.PowerSubstationMachine;
 import com.gregtechceu.gtceu.config.ConfigHolder;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
 
@@ -77,7 +78,7 @@ public class WPowerSubstationMachine extends WorkableMultiblockMachine
 
     private IMaintenanceMachine maintenance;
 
-    private com.gtmoremultis.gtmm.common.machine.multiblock.WPowerSubstationMachine.WPowerStationEnergyBank energyBank;
+    private WPowerSubstationMachine.WPowerStationEnergyBank energyBank;
     private EnergyContainerList inputHatches;
     private EnergyContainerList outputHatches;
     // energy hatches for wireless
@@ -105,7 +106,7 @@ public class WPowerSubstationMachine extends WorkableMultiblockMachine
     public WPowerSubstationMachine(IMachineBlockEntity holder) {
         super(holder);
         this.tickSubscription = new ConditionalSubscriptionHandler(this, this::transferEnergyTick, this::isFormed);
-        this.energyBank = new com.gtmoremultis.gtmm.common.machine.multiblock.WPowerSubstationMachine.WPowerStationEnergyBank(this, List.of());
+        this.energyBank = new WPowerSubstationMachine.WPowerStationEnergyBank(this, List.of());
     }
 
     @Override
@@ -113,16 +114,6 @@ public class WPowerSubstationMachine extends WorkableMultiblockMachine
         super.onStructureFormed();
         List<IEnergyContainer> inputs = new ArrayList<>();
         List<IEnergyContainer> outputs = new ArrayList<>();
-
-        // add wireless energy hatches on same frequency to machine
-        if (getLevel() instanceof ServerLevel serverLevel) {
-            WPowerSubstationSavedData savedData = WPowerSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
-            EnergyContainerList winputs = savedData.getWirelessEnergyInputs(getFrequency());
-            EnergyContainerList woutputs = savedData.getWirelessEnergyInputs(getFrequency());
-            wirelessInputHatches = winputs;
-            wirelessOutputHatches = woutputs;
-        }
-
         Map<Long, IO> ioMap = getMultiblockState().getMatchContext().getOrCreate("ioMap", Long2ObjectMaps::emptyMap);
         for (IMultiPart part : getParts()) {
             IO io = ioMap.getOrDefault(part.self().getPos().asLong(), IO.BOTH);
@@ -151,7 +142,7 @@ public class WPowerSubstationMachine extends WorkableMultiblockMachine
         List<IBatteryData> batteries = new ArrayList<>();
         for (Map.Entry<String, Object> battery : getMultiblockState().getMatchContext().entrySet()) {
             if (battery.getKey().startsWith(PMC_BATTERY_HEADER) &&
-                    battery.getValue() instanceof WPowerSubstationMachine.BatteryMatchWrapper wrapper) {
+                    battery.getValue() instanceof WPowerSubstationMachine.WBatteryMatchWrapper wrapper) {
                 for (int i = 0; i < wrapper.amount; i++) {
                     batteries.add(wrapper.partType);
                 }
@@ -163,11 +154,21 @@ public class WPowerSubstationMachine extends WorkableMultiblockMachine
             return;
         }
         if (this.energyBank == null) {
-            this.energyBank = new com.gtmoremultis.gtmm.common.machine.multiblock.WPowerSubstationMachine.WPowerStationEnergyBank(this, batteries);
+            this.energyBank = new WPowerSubstationMachine.WPowerStationEnergyBank(this, batteries);
         } else {
             this.energyBank = energyBank.rebuild(batteries);
         }
         this.passiveDrain = this.energyBank.getPassiveDrainPerTick();
+
+        // add wireless energy hatches on same frequency to machine
+        if (getLevel() instanceof ServerLevel serverLevel) {
+            WPowerSubstationSavedData savedData = WPowerSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
+            EnergyContainerList winputs = savedData.getWirelessEnergyInputs(getFrequency());
+            EnergyContainerList woutputs = savedData.getWirelessEnergyOutputs(getFrequency());
+            wirelessInputHatches = winputs;
+            wirelessOutputHatches = woutputs;
+            System.out.println("wgtmm: loaded wireless energy hatches to wpss\n" + winputs + "\n" + woutputs);
+        }
     }
 
     @Override
@@ -400,6 +401,15 @@ public class WPowerSubstationMachine extends WorkableMultiblockMachine
 
     public void setFrequencyFromString(String str) {
         setFrequency(Integer.parseInt(str));
+
+        if (getLevel() instanceof ServerLevel serverLevel) {
+            WPowerSubstationSavedData savedData = WPowerSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
+            EnergyContainerList winputs = savedData.getWirelessEnergyInputs(getFrequency());
+            EnergyContainerList woutputs = savedData.getWirelessEnergyOutputs(getFrequency());
+            wirelessInputHatches = winputs;
+            wirelessOutputHatches = woutputs;
+            System.out.println("wgtmm: reloaded wireless energy hatches to wpss\n" + winputs + "\n" + woutputs);
+        }
     }
 
     public String getFrequencyString() {
@@ -641,16 +651,16 @@ public class WPowerSubstationMachine extends WorkableMultiblockMachine
     }
 
     @Getter
-    public static class BatteryMatchWrapper {
+    public static class WBatteryMatchWrapper {
 
         private final IBatteryData partType;
         private int amount;
 
-        public BatteryMatchWrapper(IBatteryData partType) {
+        public WBatteryMatchWrapper(IBatteryData partType) {
             this.partType = partType;
         }
 
-        public com.gtmoremultis.gtmm.common.machine.multiblock.WPowerSubstationMachine.BatteryMatchWrapper increment() {
+        public com.gtmoremultis.gtmm.common.machine.multiblock.WPowerSubstationMachine.WBatteryMatchWrapper increment() {
             amount++;
             return this;
         }

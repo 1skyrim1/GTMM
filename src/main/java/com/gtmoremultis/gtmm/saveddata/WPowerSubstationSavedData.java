@@ -228,7 +228,7 @@ public class WPowerSubstationSavedData extends SavedData {
                     .getLevel(ResourceKey.create(Registries.DIMENSION, pair.getFirst()));
             if (dimension != null) {
                 MetaMachine machine = MetaMachine.getMachine(dimension, pair.getSecond());
-                if (machine instanceof EnergyHatchPartMachine hatch) {
+                if (machine instanceof WirelessEnergyHatchPartMachine hatch) {
                     energyContainerList.add(hatch.energyContainer);
                 }
             }
@@ -246,7 +246,7 @@ public class WPowerSubstationSavedData extends SavedData {
             if (dimension != null) {
                 MetaMachine machine = MetaMachine.getMachine(dimension, pair.getSecond());
 
-                if (machine instanceof EnergyHatchPartMachine hatch) {
+                if (machine instanceof WirelessEnergyHatchPartMachine hatch) {
                     energyContainerList.add(hatch.energyContainer);
                 }
             }

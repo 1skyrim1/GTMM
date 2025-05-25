@@ -51,7 +51,7 @@ public class GTMMMachines {
     public static final MachineDefinition CREATIVE_ENERGY_INPUT_HATCH = REGISTRATE.machine("creative_energy_hatch", CreativeEnergyHatchPartMachine::new)
             .langValue("Creative Energy Input Hatch")
             .rotationState(RotationState.ALL)
-            .overlayTieredHullRenderer("energy_hatch.input")
+            .overlayTieredHullRenderer("wireless_dynamo_hatch")
             .abilities(PartAbility.INPUT_ENERGY)
             .tier(MAX)
             .register();
@@ -91,7 +91,7 @@ public class GTMMMachines {
                                     .or(abilities(PartAbility.OUTPUT_ENERGY, PartAbility.SUBSTATION_OUTPUT_ENERGY,
                                             PartAbility.OUTPUT_LASER)))
                     .where('G', Predicates.blocks(GTBlocks.FUSION_GLASS.get()))
-                    .where('B', Predicates.powerSubstationBatteries())
+                    .where('B', APredicates.WirelessPowerSubstationBatteries())
                     .build())
             .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_palladium_substation"),
                     GTCEu.id("block/multiblock/power_substation"))
