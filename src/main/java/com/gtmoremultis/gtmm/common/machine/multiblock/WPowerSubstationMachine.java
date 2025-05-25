@@ -165,7 +165,7 @@ public class WPowerSubstationMachine extends WorkableMultiblockMachine
             WPowerSubstationSavedData savedData = WPowerSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
             wirelessInputHatches = savedData.getWirelessEnergyInputs(getFrequency());
             wirelessOutputHatches = savedData.getWirelessEnergyOutputs(getFrequency());
-            System.out.println("wgtmm: loaded wireless energy hatches to wpss on frequency" + frequency);
+            //System.out.println("wgtmm: loaded wireless energy hatches to wpss on frequency" + frequency);
         }
     }
 
@@ -203,7 +203,7 @@ public class WPowerSubstationMachine extends WorkableMultiblockMachine
                 WPowerSubstationSavedData savedData = WPowerSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
                 wirelessInputHatches = savedData.getWirelessEnergyInputs(getFrequency());
                 wirelessOutputHatches = savedData.getWirelessEnergyOutputs(getFrequency());
-                System.out.println("wgtmm: updated wireless energy hatches to wpss on frequency" + frequency);
+                //System.out.println("wgtmm: updated wireless energy hatches to wpss on frequency" + frequency);
             }
 
             if (isWorkingEnabled() && isFormed()) {
@@ -412,7 +412,7 @@ public class WPowerSubstationMachine extends WorkableMultiblockMachine
             WPowerSubstationSavedData savedData = WPowerSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
             wirelessInputHatches = savedData.getWirelessEnergyInputs(getFrequency());
             wirelessOutputHatches = savedData.getWirelessEnergyOutputs(getFrequency());
-            System.out.println("wgtmm: reloaded wireless energy hatches to wpss on new frequency" + frequency);
+            //System.out.println("wgtmm: reloaded wireless energy hatches to wpss on new frequency" + frequency);
         }
     }
 

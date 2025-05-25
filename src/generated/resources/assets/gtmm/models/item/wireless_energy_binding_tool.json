@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gtmm:item/wireless_energy_binding_tool"
+  }
+}

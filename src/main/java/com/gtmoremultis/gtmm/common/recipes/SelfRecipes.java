@@ -22,6 +22,7 @@ import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
+import static com.gtmoremultis.gtmm.common.data.GTMMItems.WIRELESS_ENERGY_BINDING_TOOL;
 import static com.gtmoremultis.gtmm.common.data.GTMMRecipes.dur;
 import static com.gtmoremultis.gtmm.common.data.GTMMItems.ADVANCED_TERMINAL;
 
@@ -41,6 +42,11 @@ public class SelfRecipes {
                 'B', new ItemStack(Items.BOOK),
                 'P', new UnificationEntry(plate, Steel),
                 'W', new UnificationEntry(wireGtSingle, Tin));
+
+        VanillaRecipeHelper.addShapedRecipe(provider, true, GTMM.id("wireless_energy_binding_tool"), WIRELESS_ENERGY_BINDING_TOOL.asStack(),
+                "AS",
+                'A', GTItems.TOOL_DATA_STICK,
+                'S', Items.PAPER);
     }
 
     private static void materialRecipes(Consumer<FinishedRecipe> provider) {

@@ -9,10 +9,7 @@ import com.gtmoremultis.gtmm.common.machine.multiblock.WPowerSubstationMachine;
 import com.lowdragmc.lowdraglib.gui.editor.ColorPattern;
 import com.lowdragmc.lowdraglib.gui.factory.HeldItemUIFactory;
 import com.lowdragmc.lowdraglib.gui.modular.ModularUI;
-import com.lowdragmc.lowdraglib.gui.widget.DraggableScrollableWidgetGroup;
-import com.lowdragmc.lowdraglib.gui.widget.LabelWidget;
-import com.lowdragmc.lowdraglib.gui.widget.Widget;
-import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
+import com.lowdragmc.lowdraglib.gui.widget.*;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.core.BlockPos;
@@ -61,24 +58,21 @@ public class WirelessEnergyBindingToolBehavior implements IItemUIFactory {
 
     @Override
     public ModularUI createUI(HeldItemUIFactory.HeldItemHolder holder, Player entityPlayer) {
-        return new ModularUI(176, 166, holder, entityPlayer).widget(createWidget());
+        return new ModularUI(108, 34, holder, entityPlayer).widget(createWidget());
     }
 
     private Widget createWidget() {
-        var group = new WidgetGroup(0, 0, 182 + 8, 42 + 8);
+        var group = new WidgetGroup(0, 0, 100 + 8, 26 + 8);
         List<Component> lines = new ArrayList<>(List.of());
-        lines.add(Component.translatable("item.gtmm.wireless_energy_binding_tool.setting.tooltip"));
+        //lines.add(Component.translatable("item.gtmm.wireless_energy_binding_tool.setting.tooltip"));
         group.addWidget(
-                new DraggableScrollableWidgetGroup(4, 4, 182, 42)
-                        .setBackground(GuiTextures.DISPLAY)
-                        .setYScrollBarWidth(2)
-                        .setYBarStyle(null, ColorPattern.T_WHITE.rectTexture().setRadius(1))
-                        //.addWidget(new LabelWidget(40, 5, Component.translatable("item.gtmm.wireless_energy_binding_tool.setting.title").getString()))
-                        .addWidget(new LabelWidget(4, 5 + 16, Component.translatable("item.gtmm.wireless_energy_binding_tool.setting.1").getString())
+                new DraggableWidgetGroup(4, 4, 100, 24)
+                        .addWidget(new LabelWidget(4, 7, Component.translatable("item.gtmm.wireless_energy_binding_tool.setting.1").getString())
                                 .setHoverTooltips(lines))
-                        .addWidget(new TerminalInputWidget(140, 5 + 16, 20, 16, this::getFrequency,
+                        .addWidget(new TerminalInputWidget(70, 5, 20, 16, this::getFrequency,
                                 this::setFrequencyWidget)
-                                .setMin(0).setMax(99)));
+                                .setMin(0).setMax(99))
+                        .setBackground(GuiTextures.DISPLAY));
         group.setBackground(GuiTextures.BACKGROUND_INVERSE);
         return group;
     }

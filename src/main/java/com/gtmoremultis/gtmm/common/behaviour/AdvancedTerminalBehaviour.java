@@ -64,11 +64,11 @@ public class AdvancedTerminalBehaviour implements IItemUIFactory {
 
     @Override
     public ModularUI createUI(HeldItemUIFactory.HeldItemHolder holder, Player entityPlayer) {
-        return new ModularUI(176, 166, holder, entityPlayer).widget(createWidget());
+        return new ModularUI(190, 95, holder, entityPlayer).widget(createWidget());
     }
 
     private Widget createWidget() {
-        var group = new WidgetGroup(0, 0, 182 + 8, 117 + 8);
+        var group = new WidgetGroup(0, 0, 182 + 8, 87 + 8);
         int rowIndex = 1;
         List<Component> lines = new ArrayList<>(List.of());
         lines.add(Component.translatable("item.gtmm.advanced_terminal.setting.1.tooltip"));
@@ -77,11 +77,11 @@ public class AdvancedTerminalBehaviour implements IItemUIFactory {
                 .forEach(coil -> lines.add(Component.translatable(String.valueOf(coil.getKey().getTier() + 1)).append(":").append(coil.getValue().get().getName())));
 
         group.addWidget(
-                new DraggableScrollableWidgetGroup(4, 4, 182, 117)
+                new DraggableScrollableWidgetGroup(4, 4, 182, 87)
                         .setBackground(GuiTextures.DISPLAY)
                         .setYScrollBarWidth(2)
                         .setYBarStyle(null, ColorPattern.T_WHITE.rectTexture().setRadius(1))
-                        .addWidget(new LabelWidget(40, 5, Component.translatable("item.gtmm.advanced_terminal.setting.title").getString()))
+                        .addWidget(new LabelWidget(25, 5, Component.translatable("item.gtmm.advanced_terminal.setting.title").getString()))
                         .addWidget(new LabelWidget(4, 5 + 16 * rowIndex, Component.translatable("item.gtmm.advanced_terminal.setting.1").getString())
                                 .setHoverTooltips(lines))
                         .addWidget(new TerminalInputWidget(140, 5 + 16 * rowIndex++, 20, 16, autoBuildSetting::getCoilTier,
@@ -98,7 +98,7 @@ public class AdvancedTerminalBehaviour implements IItemUIFactory {
                                 this::setIsBuildHatches).setMin(0).setMax(1))
                         .addWidget(new LabelWidget(4, 5 + 16 * rowIndex, Component.translatable("item.gtmm.advanced_terminal.setting.4").getString())
                                 .setHoverTooltips("item.gtmm.advanced_terminal.setting.4.tooltip"))
-                        .addWidget(new TerminalInputWidget(140, 5 + 16 * rowIndex++, 20, 16, autoBuildSetting::getFlipped,
+                        .addWidget(new TerminalInputWidget(140, 5 + 16 * rowIndex, 20, 16, autoBuildSetting::getFlipped,
                                 this::setIsFlipped).setMin(0).setMax(1)));
         group.setBackground(GuiTextures.BACKGROUND_INVERSE);
         return group;
