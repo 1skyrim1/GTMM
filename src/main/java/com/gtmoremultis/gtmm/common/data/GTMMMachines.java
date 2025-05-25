@@ -59,7 +59,7 @@ public class GTMMMachines {
 
     // Wireless Power Substation
     public static final MultiblockMachineDefinition WIRELESS_POWER_SUBSTATION = REGISTRATE.multiblock("wireless_power_substation", WPowerSubstationMachine::new)
-            .langValue("Advanced Power Substation")
+            .langValue("Wireless Power Substation")
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.DUMMY_RECIPES)
             .tooltips(Component.translatable("gtceu.machine.power_substation.tooltip.0"),
@@ -91,7 +91,7 @@ public class GTMMMachines {
                                             PartAbility.INPUT_LASER))
                                     .or(abilities(PartAbility.OUTPUT_ENERGY, PartAbility.SUBSTATION_OUTPUT_ENERGY,
                                             PartAbility.OUTPUT_LASER)))
-                    .where('G', Predicates.blocks(GTBlocks.FUSION_GLASS.get()))
+                    .where('G', Predicates.blocks(GTBlocks.CASING_LAMINATED_GLASS.get()))
                     .where('B', APredicates.WirelessPowerSubstationBatteries())
                     .build())
             .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_palladium_substation"),

@@ -22,10 +22,10 @@ public class ConfigHandler {
     @Configurable
     public MachineConfigs machine = new MachineConfigs();
 
+    @Configurable
+    public WirelessConfigs wireless = new WirelessConfigs();
+
     public static class WirelessConfigs {
-        @Configurable
-        @Configurable.Comment({"Can the wireless mode also affect single block machines?", "Default: false"})
-        public boolean enableAllMachineWireless = false;
         @Configurable
         @Configurable.Comment({"Enable Wireless Energy Hatches for Low Tiers?", "Default: false"})
         public boolean enable_low_tier_wireless = false;

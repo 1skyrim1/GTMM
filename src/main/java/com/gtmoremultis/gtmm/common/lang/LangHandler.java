@@ -11,6 +11,10 @@ public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
         provider.add("gtmm.gui.wpss.wireless_configurator.frequency_set", "Current Frequency: %s");
         provider.add("gtmm.gui.wpss.wireless_configurator.title", "Set Frequency");
 
+        // Wireless Hatches
+        provider.add("tooltips.wireless_energy_input_hatch", "Wireless Version of Energy Hatch.\nNeeds to have a Wireless Substation on the same frequency to work");
+        provider.add("tooltips.wireless_energy_output_hatch", "Wireless Version of Dynamo Hatch.\nOutputs Energy to Wireless Substation on the same frequency");
+
         // Advanced Terminal
         provider.add("item.gtmm.advanced_terminal.setting.title", "Advanced Terminal Settings");
         provider.add("item.gtmm.advanced_terminal.setting.1", "Coil Tier");
