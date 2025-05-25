@@ -1,6 +1,6 @@
 package com.gtmoremultis.gtmm.common.recipes;
 
-import com.gregtechceu.gtceu.api.data.chemical.material.stack.MaterialEntry;
+import com.gregtechceu.gtceu.api.data.chemical.material.stack.UnificationEntry;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.data.GTMachines;
@@ -36,11 +36,11 @@ public class SelfRecipes {
     private static void itemRecipes(Consumer<FinishedRecipe> provider) {
         VanillaRecipeHelper.addShapedRecipe(provider, true, GTMM.id("advanced_terminal"), ADVANCED_TERMINAL.asStack(),
                 "SGS", "PBP", "PWP",
-                'S', new MaterialEntry(screw, Steel),
+                'S', new UnificationEntry(screw, Steel),
                 'G', Tags.Items.GLASS_PANES,
                 'B', new ItemStack(Items.BOOK),
-                'P', new MaterialEntry(plate, Steel),
-                'W', new MaterialEntry(wireGtSingle, Tin));
+                'P', new UnificationEntry(plate, Steel),
+                'W', new UnificationEntry(wireGtSingle, Tin));
     }
 
     private static void materialRecipes(Consumer<FinishedRecipe> provider) {

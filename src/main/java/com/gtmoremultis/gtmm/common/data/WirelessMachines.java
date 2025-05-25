@@ -37,11 +37,24 @@ public class WirelessMachines {
         return registerTieredWirelessEnergyMachines("wireless_energy_input_hatch_%sa".formatted(amperage),
                 (holder, tier) -> new WirelessEnergyHatchPartMachine(holder, tier, IO.IN, amperage),
                 (tier, builder) -> builder
-                        .langValue("%s §r%sA Wireless Energy Hatch".formatted(VNF[tier], amperage == 2 ? "" : amperage))
+                        .langValue("%s §r%sA Wireless Energy Hatch".formatted(VNF[tier], amperage))
                         .rotationState(RotationState.ALL)
                         .abilities(PartAbility.INPUT_ENERGY)
-                        .overlayTieredHullRenderer("wireless_energy_hatch.input")
+                        .overlayTieredHullRenderer("wireless_energy_hatch")
                         .tooltips(Component.translatable("tooltips.wireless_energy_input_hatch"))
+                        .register(),
+                tiers);
+    }
+
+    public static MachineDefinition[] reigsterWirelessDynamoHatches(int amperage, int... tiers) {
+        return registerTieredWirelessEnergyMachines("wireless_energy_output_hatch_%sa".formatted(amperage),
+                (holder, tier) -> new WirelessEnergyHatchPartMachine(holder, tier, IO.OUT, amperage),
+                (tier, builder) -> builder
+                        .langValue("%s §r%sA Wireless Dynamo Hatch".formatted(VNF[tier], amperage))
+                        .rotationState(RotationState.ALL)
+                        .abilities(PartAbility.OUTPUT_ENERGY)
+                        .overlayTieredHullRenderer("wireless_dynamo_hatch")
+                        .tooltips(Component.translatable("tooltips.wireless_energy_output_hatch"))
                         .register(),
                 tiers);
     }

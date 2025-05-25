@@ -7,6 +7,7 @@ import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
 import com.gregtechceu.gtceu.api.misc.EnergyContainerList;
 import com.gregtechceu.gtceu.common.machine.multiblock.part.EnergyHatchPartMachine;
 import com.gregtechceu.gtceu.common.machine.multiblock.part.LaserHatchPartMachine;
+import com.gtmoremultis.gtmm.api.machine.multiblock.WirelessEnergyHatchPartMachine;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -24,7 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WirelessSubstationSavedData extends SavedData {
+public class WPowerSubstationSavedData extends SavedData {
 
     public Map<Integer, List<Pair<ResourceLocation, BlockPos>>> energyInputs;
     public Map<Integer, List<Pair<ResourceLocation, BlockPos>>> energyOutputs;
@@ -35,13 +36,13 @@ public class WirelessSubstationSavedData extends SavedData {
 
     private final ServerLevel serverLevel;
 
-    private WirelessSubstationSavedData(ServerLevel serverLevel) {
+    private WPowerSubstationSavedData(ServerLevel serverLevel) {
         energyInputs = new HashMap<>();
         energyOutputs = new HashMap<>();
         this.serverLevel = serverLevel;
     }
 
-    private WirelessSubstationSavedData(ServerLevel serverLevel, CompoundTag tag) {
+    private WPowerSubstationSavedData(ServerLevel serverLevel, CompoundTag tag) {
         this(serverLevel);
         var energyInputsTag = tag.getCompound("energy_inputs");
         var energyOutputsTag = tag.getCompound("energy_outputs");
@@ -81,9 +82,9 @@ public class WirelessSubstationSavedData extends SavedData {
         return energyPairs;
     }
 
-    public static WirelessSubstationSavedData getOrCreate(ServerLevel serverLevel) {
-        return serverLevel.getDataStorage().computeIfAbsent((tag) -> new WirelessSubstationSavedData(serverLevel, tag),
-                () -> new WirelessSubstationSavedData(serverLevel), DATA_NAME);
+    public static WPowerSubstationSavedData getOrCreate(ServerLevel serverLevel) {
+        return serverLevel.getDataStorage().computeIfAbsent((tag) -> new WPowerSubstationSavedData(serverLevel, tag),
+                () -> new WPowerSubstationSavedData(serverLevel), DATA_NAME);
     }
 
     @Override
@@ -136,22 +137,18 @@ public class WirelessSubstationSavedData extends SavedData {
         return tags;
     }
 
-    public void addEnergyInputs(int freq, List<IMultiPart> parts) {
+    public void addEnergyInputs(int freq, WirelessEnergyHatchPartMachine machine) {
         List<com.mojang.datafixers.util.Pair<ResourceLocation, BlockPos>> inputPairs = energyInputs.computeIfAbsent(freq,
                 (f) -> new ArrayList<>());
         boolean changed = false;
-        for (IMultiPart part : parts) {
-            if (part instanceof MetaMachine machine) {
-                ServerLevel level = (ServerLevel) machine.getLevel();
-                assert level != null;
-                ResourceLocation dimension = level.dimension().location();
-                BlockPos pos = machine.getPos();
-                com.mojang.datafixers.util.Pair<ResourceLocation, BlockPos> pair = new com.mojang.datafixers.util.Pair<>(dimension, pos);
-                if (!inputPairs.contains(pair)) {
-                    inputPairs.add(pair);
-                    changed = true;
-                }
-            }
+        ServerLevel level = (ServerLevel) machine.getLevel();
+        assert level != null;
+        ResourceLocation dimension = level.dimension().location();
+        BlockPos pos = machine.getPos();
+        com.mojang.datafixers.util.Pair<ResourceLocation, BlockPos> pair = new com.mojang.datafixers.util.Pair<>(dimension, pos);
+        if (!inputPairs.contains(pair)) {
+            inputPairs.add(pair);
+            changed = true;
         }
         if (changed) {
             setDirty();
@@ -159,21 +156,17 @@ public class WirelessSubstationSavedData extends SavedData {
         energyInputs.put(freq, inputPairs);
     }
 
-    public void removeEnergyInputs(int freq, List<IMultiPart> parts) {
+    public void removeEnergyInputs(int freq, WirelessEnergyHatchPartMachine machine) {
         List<com.mojang.datafixers.util.Pair<ResourceLocation, BlockPos>> inputPairs = energyInputs.computeIfAbsent(freq,
                 (f) -> new ArrayList<>());
         boolean changed = false;
-        for (IMultiPart part : parts) {
-            if (part instanceof MetaMachine machine) {
-                ServerLevel level = (ServerLevel) machine.getLevel();
-                assert level != null;
-                ResourceLocation dimension = level.dimension().location();
-                BlockPos pos = machine.getPos();
-                com.mojang.datafixers.util.Pair<ResourceLocation, BlockPos> pair = new com.mojang.datafixers.util.Pair<>(dimension, pos);
-                if (inputPairs.remove(pair)) {
-                    changed = true;
-                }
-            }
+        ServerLevel level = (ServerLevel) machine.getLevel();
+        assert level != null;
+        ResourceLocation dimension = level.dimension().location();
+        BlockPos pos = machine.getPos();
+        com.mojang.datafixers.util.Pair<ResourceLocation, BlockPos> pair = new com.mojang.datafixers.util.Pair<>(dimension, pos);
+        if (inputPairs.remove(pair)) {
+            changed = true;
         }
         if (changed) {
             setDirty();
@@ -181,22 +174,18 @@ public class WirelessSubstationSavedData extends SavedData {
         energyInputs.put(freq, inputPairs);
     }
 
-    public void addEnergyOutputs(int freq, List<IMultiPart> parts) {
+    public void addEnergyOutputs(int freq, WirelessEnergyHatchPartMachine machine) {
         List<Pair<ResourceLocation, BlockPos>> outputPairs = energyOutputs.computeIfAbsent(freq,
                 (f) -> new ArrayList<>());
         boolean changed = false;
-        for (IMultiPart part : parts) {
-            if (part instanceof MetaMachine machine) {
-                ServerLevel level = (ServerLevel) machine.getLevel();
-                assert level != null;
-                ResourceLocation dimension = level.dimension().location();
-                BlockPos pos = machine.getPos();
-                Pair<ResourceLocation, BlockPos> pair = new Pair<>(dimension, pos);
-                if (!outputPairs.contains(pair)) {
-                    outputPairs.add(pair);
-                    changed = true;
-                }
-            }
+        ServerLevel level = (ServerLevel) machine.getLevel();
+        assert level != null;
+        ResourceLocation dimension = level.dimension().location();
+        BlockPos pos = machine.getPos();
+        Pair<ResourceLocation, BlockPos> pair = new Pair<>(dimension, pos);
+        if (!outputPairs.contains(pair)) {
+            outputPairs.add(pair);
+            changed = true;
         }
         if (changed) {
             setDirty();
@@ -204,21 +193,17 @@ public class WirelessSubstationSavedData extends SavedData {
         energyOutputs.put(freq, outputPairs);
     }
 
-    public void removeEnergyOutputs(int freq, List<IMultiPart> parts) {
+    public void removeEnergyOutputs(int freq, WirelessEnergyHatchPartMachine machine) {
         List<Pair<ResourceLocation, BlockPos>> outputPairs = energyOutputs.computeIfAbsent(freq,
                 (f) -> new ArrayList<>());
         boolean changed = false;
-        for (IMultiPart part : parts) {
-            if (part instanceof MetaMachine machine) {
-                ServerLevel level = (ServerLevel) machine.getLevel();
-                assert level != null;
-                ResourceLocation dimension = level.dimension().location();
-                BlockPos pos = machine.getPos();
-                Pair<ResourceLocation, BlockPos> pair = new Pair<>(dimension, pos);
-                if (outputPairs.remove(pair)) {
-                    changed = true;
-                }
-            }
+        ServerLevel level = (ServerLevel) machine.getLevel();
+        assert level != null;
+        ResourceLocation dimension = level.dimension().location();
+        BlockPos pos = machine.getPos();
+        Pair<ResourceLocation, BlockPos> pair = new Pair<>(dimension, pos);
+        if (outputPairs.remove(pair)) {
+            changed = true;
         }
         if (changed) {
             setDirty();

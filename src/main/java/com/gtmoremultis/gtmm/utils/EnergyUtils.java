@@ -19,7 +19,6 @@ public class EnergyUtils {
                 energyContainerList.add(hatch.energyContainer);
             }
         }
-
         return new EnergyContainerList(energyContainerList);
     }
 }

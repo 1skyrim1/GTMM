@@ -9,7 +9,7 @@ import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
 import com.gregtechceu.gtceu.api.machine.multiblock.part.TieredIOPartMachine;
 import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gtmoremultis.gtmm.api.machine.trait.NotifiableWirelessEnergyContainer;
-import com.gtmoremultis.gtmm.saveddata.WirelessSubstationSavedData;
+import com.gtmoremultis.gtmm.saveddata.WPowerSubstationSavedData;
 import com.lowdragmc.lowdraglib.gui.texture.IGuiTexture;
 import com.lowdragmc.lowdraglib.gui.texture.ItemStackTexture;
 import com.lowdragmc.lowdraglib.gui.widget.TextFieldWidget;
@@ -37,13 +37,10 @@ public class WirelessEnergyHatchPartMachine extends TieredIOPartMachine {
     @Getter
     protected int amperage;
 
-    private List<IMultiPart> part = new ArrayList<>();
-
     public WirelessEnergyHatchPartMachine(IMachineBlockEntity holder, int tier, IO io, int amperage, Object... args) {
         super(holder, tier, io);
         this.amperage = amperage;
         this.energyContainer = createEnergyContainer(args);
-        this.part.add(this);
         addWirelessEnergy();
     }
 
@@ -77,25 +74,20 @@ public class WirelessEnergyHatchPartMachine extends TieredIOPartMachine {
 
     private void removeWirelessEnergy() {
         if (getLevel() instanceof ServerLevel serverLevel) {
-            WirelessSubstationSavedData savedData = WirelessSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
-            if (this.io == IO.IN) {
-                savedData.removeEnergyOutputs(energyContainer.getFrequency(), this.part);
-            } else {
-                savedData.removeEnergyInputs(energyContainer.getFrequency(), this.part);
-            }
-            savedData.removeEnergyInputs(energyContainer.getFrequency(), this.part);
-            savedData.removeEnergyOutputs(energyContainer.getFrequency(), this.part);
+            WPowerSubstationSavedData savedData = WPowerSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
+            savedData.removeEnergyInputs(energyContainer.getFrequency(), this);
+            savedData.removeEnergyOutputs(energyContainer.getFrequency(), this);
             savedData.saveDataToCache();
         }
     }
 
     private void addWirelessEnergy() {
         if (getLevel() instanceof ServerLevel serverLevel) {
-            WirelessSubstationSavedData savedData = WirelessSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
+            WPowerSubstationSavedData savedData = WPowerSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
             if (this.io == IO.IN) {
-                savedData.addEnergyOutputs(energyContainer.getFrequency(), this.part);
+                savedData.addEnergyOutputs(energyContainer.getFrequency(), this);
             } else {
-                savedData.addEnergyInputs(energyContainer.getFrequency(), this.part);
+                savedData.addEnergyInputs(energyContainer.getFrequency(), this);
             }
             savedData.saveDataToCache();
         }

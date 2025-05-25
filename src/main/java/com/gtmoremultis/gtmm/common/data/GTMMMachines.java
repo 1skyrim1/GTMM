@@ -26,7 +26,6 @@ import com.gtmoremultis.gtmm.api.pattern.APredicates;
 import com.gtmoremultis.gtmm.common.block.BlockTier;
 import com.gtmoremultis.gtmm.common.block.MachineCasingBlock;
 import com.gtmoremultis.gtmm.common.machine.multiblock.WPowerSubstationMachine;
-import com.gtmoremultis.gtmm.common.machine.multiblock.WirelessSubstationMachine;
 import com.gtmoremultis.gtmm.config.ConfigHandler;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -65,10 +64,10 @@ public class GTMMMachines {
             .tooltips(Component.translatable("gtceu.machine.power_substation.tooltip.0"),
                     Component.translatable("gtceu.machine.power_substation.tooltip.1"),
                     Component.translatable("gtceu.machine.power_substation.tooltip.2",
-                            PowerSubstationMachine.MAX_BATTERY_LAYERS),
+                            WPowerSubstationMachine.MAX_BATTERY_LAYERS),
                     Component.translatable("gtceu.machine.power_substation.tooltip.3"),
                     Component.translatable("gtceu.machine.power_substation.tooltip.4",
-                            PowerSubstationMachine.PASSIVE_DRAIN_MAX_PER_STORAGE / 1000))
+                            WPowerSubstationMachine.PASSIVE_DRAIN_MAX_PER_STORAGE / 1000))
             .tooltipBuilder(
                     (stack,
                      components) -> components.add(Component.translatable("gtceu.machine.power_substation.tooltip.5")
@@ -79,19 +78,19 @@ public class GTMMMachines {
                     .aisle("XXSXX", "XXXXX", "XXXXX", "XXXXX", "XXXXX")
                     .aisle("XXXXX", "XCCCX", "XCCCX", "XCCCX", "XXXXX")
                     .aisle("GGGGG", "GBBBG", "GBBBG", "GBBBG", "GGGGG")
-                    .setRepeatable(1, PowerSubstationMachine.MAX_BATTERY_LAYERS)
+                    .setRepeatable(1, WPowerSubstationMachine.MAX_BATTERY_LAYERS)
                     .aisle("GGGGG", "GGGGG", "GGGGG", "GGGGG", "GGGGG")
                     .where('S', Predicates.controller(Predicates.blocks(definition.getBlock())))
                     .where('C', Predicates.blocks(GTBlocks.CASING_PALLADIUM_SUBSTATION.get()))
                     .where('X',
                             Predicates.blocks(GTBlocks.CASING_PALLADIUM_SUBSTATION.get())
-                                    .setMinGlobalLimited(PowerSubstationMachine.MIN_CASINGS)
+                                    .setMinGlobalLimited(WPowerSubstationMachine.MIN_CASINGS)
                                     .or(autoAbilities(true, false, false))
                                     .or(abilities(PartAbility.INPUT_ENERGY, PartAbility.SUBSTATION_INPUT_ENERGY,
-                                            PartAbility.INPUT_LASER).setMinGlobalLimited(1))
+                                            PartAbility.INPUT_LASER))
                                     .or(abilities(PartAbility.OUTPUT_ENERGY, PartAbility.SUBSTATION_OUTPUT_ENERGY,
-                                            PartAbility.OUTPUT_LASER).setMinGlobalLimited(1)))
-                    .where('G', Predicates.blocks(GTBlocks.CASING_LAMINATED_GLASS.get()))
+                                            PartAbility.OUTPUT_LASER)))
+                    .where('G', Predicates.blocks(GTBlocks.FUSION_GLASS.get()))
                     .where('B', Predicates.powerSubstationBatteries())
                     .build())
             .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_palladium_substation"),
