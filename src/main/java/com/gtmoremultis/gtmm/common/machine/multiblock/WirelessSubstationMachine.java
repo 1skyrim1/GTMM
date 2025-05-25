@@ -4,6 +4,7 @@ import com.gregtechceu.gtceu.api.gui.fancy.ConfiguratorPanel;
 import com.gregtechceu.gtceu.api.gui.fancy.IFancyConfigurator;
 import com.gregtechceu.gtceu.api.machine.ConditionalSubscriptionHandler;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
+import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
 import com.gregtechceu.gtceu.api.misc.EnergyContainerList;
 import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.machine.multiblock.electric.PowerSubstationMachine;
@@ -15,7 +16,10 @@ import com.lowdragmc.lowdraglib.gui.widget.TextFieldWidget;
 import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
+import com.lowdragmc.lowdraglib.syncdata.annotation.RequireRerender;
+import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 import lombok.Getter;
+import lombok.Setter;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 
@@ -23,43 +27,40 @@ import java.util.List;
 
 public class WirelessSubstationMachine extends PowerSubstationMachine {
 
-    private final PowerStationEnergyBank energyBank;
+    protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
+            WirelessSubstationMachine.class, WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);
 
     @Persisted
     @DescSynced
+    @RequireRerender
     @Getter
-    private int frequency;
+    @Setter
+    private int frequency = 0;
 
     protected ConditionalSubscriptionHandler converterSubscription;
 
     public WirelessSubstationMachine(IMachineBlockEntity holder) {
         super(holder);
-        //this.tickSubscription = new ConditionalSubscriptionHandler(this, this::transferEnergyTick, this::isFormed);
-        this.energyBank = new PowerStationEnergyBank(this, List.of());
         this.converterSubscription = new ConditionalSubscriptionHandler(this, this::convertEnergyTick, this::isFormed);
-        this.frequency = 0;
     }
 
     public void convertEnergyTick() {
-        if (isWorkingEnabled()) {
+        if (isWorkingEnabled() && isFormed()) {
             if (getLevel() instanceof ServerLevel serverLevel) {
                 WirelessSubstationSavedData savedData = WirelessSubstationSavedData.getOrCreate(serverLevel.getServer().overworld());
 
-                EnergyContainerList powerInput = savedData.getWirelessEnergyInputs(frequency); // power inputs -> energy to network
-                EnergyContainerList powerOutput = savedData.getWirelessEnergyOutputs(frequency); // power outputs -> energy from network
-
-                System.out.println(powerInput);
-                System.out.println(powerOutput);
+                //EnergyContainerList powerInput = savedData.getWirelessEnergyInputs(getFrequency()); // power inputs -> energy to network
+                EnergyContainerList powerOutput = savedData.getWirelessEnergyOutputs(getFrequency()); // power outputs -> energy from network
 
                 // add energy to station
-                long canDrain = powerInput.getEnergyStored();
-                long actuallyDrained = this.energyBank.fill(canDrain);
-                powerInput.removeEnergy(actuallyDrained);
+                //long canDrain = powerInput.getEnergyStored();
+                //long actuallyDrained = energyBank.fill(canDrain);
+                //powerInput.removeEnergy(actuallyDrained);
 
                 // check if we can drain energy from the substation
-                long energyNeeded = powerOutput.getEnergyCanBeInserted();
-                long totalDrained = this.energyBank.drain(energyNeeded);
-                powerOutput.changeEnergy(totalDrained);
+                //long energyNeeded = powerOutput.getEnergyCanBeInserted();
+                //long totalDrained = this.energyBank.drain(energyNeeded);
+                //powerOutput.changeEnergy(totalDrained);
             }
         }
         converterSubscription.updateSubscription();
@@ -67,11 +68,11 @@ public class WirelessSubstationMachine extends PowerSubstationMachine {
 
 
     public void setFrequencyFromString(String str) {
-        frequency = Integer.parseInt(str);
+        setFrequency(Integer.parseInt(str));
     }
 
     public String getFrequencyString() {
-        return Integer.valueOf(frequency).toString();
+        return Integer.valueOf(getFrequency()).toString();
     }
 
     @Override
@@ -98,19 +99,4 @@ public class WirelessSubstationMachine extends PowerSubstationMachine {
             }
         });
     }
-
-    /*
-    @Override
-    public @NotNull Widget createUIWidget() {
-        super.createUIWidget();
-        var group = new WidgetGroup(0, 0, 182 + 8, 117 + 8);
-        group.addWidget(new DraggableScrollableWidgetGroup(4, 4, 182, 117).setBackground(getScreenTexture())
-                .addWidget(new LabelWidget(4, 5, self().getBlockState().getBlock().getDescriptionId()))
-                .addWidget(new ComponentPanelWidget(4, 17, this::addDisplayText)
-                        .setMaxWidthLimit(150)
-                        .clickHandler(this::handleDisplayClick)));
-        group.setBackground(GuiTextures.BACKGROUND_INVERSE);
-        return group;
-    }
-    */
 }

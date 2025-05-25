@@ -25,6 +25,7 @@ import com.gtmoremultis.gtmm.api.machine.multiblock.GTMMMachine;
 import com.gtmoremultis.gtmm.api.pattern.APredicates;
 import com.gtmoremultis.gtmm.common.block.BlockTier;
 import com.gtmoremultis.gtmm.common.block.MachineCasingBlock;
+import com.gtmoremultis.gtmm.common.machine.multiblock.WPowerSubstationMachine;
 import com.gtmoremultis.gtmm.common.machine.multiblock.WirelessSubstationMachine;
 import com.gtmoremultis.gtmm.config.ConfigHandler;
 import net.minecraft.core.Direction;
@@ -57,7 +58,7 @@ public class GTMMMachines {
             .register();
 
     // Wireless Power Substation
-    public static final MultiblockMachineDefinition WIRELESS_POWER_SUBSTATION = REGISTRATE.multiblock("wireless_power_substation", WirelessSubstationMachine::new)
+    public static final MultiblockMachineDefinition WIRELESS_POWER_SUBSTATION = REGISTRATE.multiblock("wireless_power_substation", WPowerSubstationMachine::new)
             .langValue("Advanced Power Substation")
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.DUMMY_RECIPES)

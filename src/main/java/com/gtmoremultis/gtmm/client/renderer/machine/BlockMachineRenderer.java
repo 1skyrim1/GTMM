@@ -12,6 +12,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
@@ -20,9 +21,13 @@ public class BlockMachineRenderer extends MachineRenderer implements IPartRender
         super(modelLocation);
     }
 
+
+    /*
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderMachine(List<BakedQuad> quads, MachineDefinition definition, @javax.annotation.Nullable MetaMachine machine, Direction frontFacing, @javax.annotation.Nullable Direction side, RandomSource rand, @javax.annotation.Nullable Direction modelFacing, ModelState modelState) {
+    public void renderMachine(List<BakedQuad> quads, MachineDefinition definition, @Nullable MetaMachine machine, Direction frontFacing, @Nullable Direction side, RandomSource rand, @Nullable Direction modelFacing, ModelState modelState) {
         this.renderBaseModel(quads, definition, machine, frontFacing, side, rand);
+        // List<BakedQuad> quads, MachineDefinition definition, @Nullable MetaMachine machine, ModelState modelState, @Nullable Direction side, RandomSource rand
     }
+     */
 }
