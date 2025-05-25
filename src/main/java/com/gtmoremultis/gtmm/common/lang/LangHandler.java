@@ -22,6 +22,13 @@ public class LangHandler extends com.gregtechceu.gtceu.data.lang.LangHandler {
         provider.add("item.gtmm.advanced_terminal.setting.4", "Flip Multiblock?");
         provider.add("item.gtmm.advanced_terminal.setting.4.tooltip", "0: No Flip\n1: Flip");
 
+        // Wireless Energy Binding Tool
+        provider.add("item.gtmm.wireless_energy_binding_tool.setting.tooltip", "Changes the frequency of block");
+        provider.add("item.gtmm.wireless_energy_binding_tool.setting.title", "Frequency");
+        provider.add("item.gtmm.wireless_energy_binding_tool.setting.1", "Frequency:");
+        provider.add("item.wireless_energy_binding_tool.chat_message.1", "Changed Frequency to %s");
+        provider.add("item.wireless_energy_binding_tool.chat_message.2", "Changed Frequency to %s");
+
         // errors
         provider.add("gtmm.multiblock.pattern.error.machine_casing", "All Machine Casings must be the same");
 

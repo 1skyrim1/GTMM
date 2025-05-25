@@ -112,15 +112,18 @@ public class AdvancedTerminalBehaviour implements IItemUIFactory {
             this.autoBuildSetting.setCoilTier(tag.getInt("CoilTier"));
             this.autoBuildSetting.setRepeatCount(tag.getInt("RepeatCount"));
             this.autoBuildSetting.setNoHatchMode(tag.getInt("NoHatchMode"));
+            this.autoBuildSetting.setFlipped(tag.getInt("Flipped"));
         } else {
             tag = new CompoundTag();
             tag.putInt("CoilTier", 0);
             tag.putInt("RepeatCount", 0);
             tag.putInt("NoHatchMode", 1);
+            tag.putInt("Flipped", 0);
             this.itemStack.setTag(tag);
             this.autoBuildSetting.setCoilTier(0);
             this.autoBuildSetting.setRepeatCount(0);
             this.autoBuildSetting.setNoHatchMode(1);
+            this.autoBuildSetting.setFlipped(0);
         }
         return IItemUIFactory.super.use(item, level, player, usedHand);
     }
